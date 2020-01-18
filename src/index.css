@@ -1,5 +1,16 @@
+:root{
+	--accent: #00ccff;
+	--text-color-primary: #000000;
+	--text-color-secondary: #333333;
+	--text-color-disabled: #888888;
+	--bg-primary: #151719;
+	--bg-secondary: #000000;
+	--bg-secondary-border: 0px 0px 0px 0px #000000;
+}
 html, body{
 	margin: 0;
+	background-color: var(--bg-primary);
+	color: var(--text-color-primary);
 	font-family: 'Josefin Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

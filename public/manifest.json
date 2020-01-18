@@ -3,12 +3,12 @@
   "name": "Caeno",
   "icons": [
     {
-      "src": "logo-no-bg.png",
+      "src": "logo.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "logo-no-bg.png",
+      "src": "logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }

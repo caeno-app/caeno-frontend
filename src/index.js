@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
+import Start from './components/Start';
 import { MemoryRouter as Router } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 
 const firebaseConfig = {
@@ -16,12 +16,14 @@ const firebaseConfig = {
     messagingSenderId: "710477581702",
     appId: "1:710477581702:web:c6ad220d1e33d4d13db007"
 };
-  // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
-    <Router>
-        <App />
+    <Router
+        initialEntries={['/', '/login', '/app']}
+        initialIndex={2} 
+    >
+        <Start />
     </Router>,
     document.getElementById('root')
 );

@@ -7,8 +7,8 @@ const Theme = ( dark ) => {
             setp('--text-color-primary', '#000000');
             setp('--text-color-secondary', '#333333');
             setp('--text-color-disabled', '#888888');
-            setp('--bg-primary', '#000000');
-            setp('--bg-secondary', '#000000');
+            setp('--bg-primary', '#ffffff');
+            setp('--bg-secondary', '#ffffff');
             setp('--bg-secondary-border', '0px 0px 0px 0px #000000');
             break;
         case 1:

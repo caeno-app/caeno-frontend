@@ -1,0 +1,10 @@
+nav{
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: 64px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr;
+    overflow: hidden;
+}
