@@ -1,27 +1,59 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import {ReactComponent as DashIcon} from '../../assets/dash.svg';
+import {ReactComponent as ProfileIcon} from '../../assets/profile.svg';
+import {ReactComponent as AddIcon} from '../../assets/add.svg';
+import {ReactComponent as NutritionIcon} from '../../assets/nutrition.svg';
+import {ReactComponent as RestaurantIcon} from '../../assets/restaurant.svg';
 import './BottomNavigation.scss';
 
-const BottomNavigation = () => {
+const icons = {
+    '/dash': <DashIcon />,
+    '/restaurants': <RestaurantIcon/>,
+    '/add': <AddIcon/>,
+    '/nutrition': <NutritionIcon/>,
+    '/profile': <ProfileIcon/>,
+}
+
+const BottomNavigation = ({selected='/dash', pages}) => {
+
+    // TODO: change getelements into a ref solution
+    const $ = (el) => { return document.getElementById(el) }
+    const [cur, setCur] = useState(selected);
+
+    useEffect(() => {
+        $(cur.substr(1)).classList.add('selected');
+        return _ => {
+            $(cur.substr(1)).classList.remove('selected');
+        };
+    }, [cur]);
+
+    useEffect(() => {
+        setCur(selected);
+    }, [selected]);
+
     return (
         <nav>
-            <Link to='/'>
-                I 1
-            </Link>
-            <Link to='/'>
-                I 2
-            </Link>
-            <Link to='/'>
-                I 3
-            </Link>
-            <Link to='/'>
-                I 4
-            </Link>
-            <Link to='/'>
-                I 5
-            </Link>
+            {pages.map(pg => <BottomNavigationTab 
+                key={pg}
+                page={pg}
+                set={setCur}
+            /> )}
         </nav>
     )
+}
+const BottomNavigationTab = ({page, set}) => {
+    return (
+        <Link
+            to={page}
+            onClick={set.bind(null, page)}
+            id={page.substr(1)}
+        >
+            <div className="nav-item-icon-holder">
+                {icons[page]}
+            </div>
+        </Link>
+    );
 }
 
 export default BottomNavigation;

@@ -9,7 +9,7 @@ let provider;
  * @function init
  * @description initializes the firestore and fb auth 
  */
-let init = () => {
+const init = () => {
     db = firebase.firestore(); 
     db.enablePersistence().catch( err => {
         if (err.code === 'failed-precondition') {
@@ -22,9 +22,19 @@ let init = () => {
     });
     // provider = new firebase.auth.FacebookAuthProvider();
 }
+const getUserData = (cb) => {
+    cb({
+        id: 'd3hsDA3',
+        fname: 'Ryan',
+        lname: 'Yang',
+    });
+}
 
 
 
 export default {
-    init: init
+    init: init,
+    get: {
+        user: getUserData
+    }
 }

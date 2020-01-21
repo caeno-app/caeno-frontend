@@ -4,9 +4,14 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { MemoryRouter as Router, Route, Switch } from 'react-router-dom';
 import Theme from '../globals/Theme';
 import BottomNavigation from './BottomNavigation/BottomNavigation';
+import Dashboard from './Dashboard/Dashboard';
+import Profile from './Profile/Profile';
+import Restaurants from './Restaurants/Restaurants';
+import Nutrition from './Nutrition/Nutrition';
+import Add from './Add/Add';
 import { userdb } from '../globals/Utils';
 import './Start.scss';
 
@@ -14,10 +19,10 @@ const Start = () => {
 	useEffect(() => { Theme(0) }, []);
 	return (
 		<Switch>
-			<Route exact path="/">
+			<Route exact path='/'>
 				home
 			</Route>
-			<Route path="/app">
+			<Route path='/app'>
 				<App />
 			</Route>
 		</Switch>
@@ -25,10 +30,24 @@ const Start = () => {
 }
 
 const App = () => {
+	const pages = [
+		'/dash',
+		'/restaurants',
+		'/add',
+		'/nutrition',
+		'/profile'
+	];
 	return (
-		<div>
-			<BottomNavigation />
-		</div>
+		<Router initialEntries={pages} initialIndex={0}>
+			<Switch>
+				<Route exact path='/dash' component={Dashboard} />
+				<Route exact path='/restaurants' component={Restaurants} />
+				<Route exact path='/add' component={Add} />
+				<Route exact path='/nutrition' component={Nutrition} />
+				<Route exact path='/profile' component={Profile} />
+			</Switch>
+			<BottomNavigation pages={pages}/>
+		</Router>
 	);
 }
 

@@ -9,7 +9,7 @@ const Theme = ( dark ) => {
             setp('--text-color-disabled', '#888888');
             setp('--bg-primary', '#ffffff');
             setp('--bg-secondary', '#ffffff');
-            setp('--bg-secondary-border', '0px 0px 0px 0px #000000');
+            setp('--bg-secondary-border', '0px 0px 5px 2px #cccccc');
             break;
         case 1:
         default:
@@ -18,8 +18,8 @@ const Theme = ( dark ) => {
             setp('--text-color-secondary', '#cdcdcd'); 
             setp('--text-color-disabled', '#888888');
             setp('--bg-primary', '#151719');
-            setp('--bg-secondary', '#353739');
-            setp('--bg-secondary-border', '0px 0px 0px 0px #000000');
+            setp('--bg-secondary', '#252729');
+            setp('--bg-secondary-border', '0px 0px 5px 5px #050709');
             break;
     }
 }

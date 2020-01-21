@@ -1,0 +1,18 @@
+.dashboard-wrapper{
+    & .greeting-card{
+        padding: 20px;
+        // background: rgb(255,164,0);
+        // background: linear-gradient(37deg, #ffd27e, #ffffcf);
+        box-shadow: 0 0 5px 2px #cccccc;
+        & span{
+            display: block;
+            margin: 40px 0 8px 0;
+            color: grey;
+        }
+        & h2{
+            font-family: 'Raleway';
+            font-size: 10vw;
+            margin: 0;
+        }
+    }
+}
