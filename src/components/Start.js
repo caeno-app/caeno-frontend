@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { MemoryRouter as Router, Route, Switch } from 'react-router-dom';
-import Theme from '../globals/Theme';
+import Theme, {current as SavedTheme} from '../globals/Theme';
 import BottomNavigation from './BottomNavigation/BottomNavigation';
 import Dashboard from './Dashboard/Dashboard';
 import Profile from './Profile/Profile';
@@ -16,7 +16,7 @@ import { userdb } from '../globals/Utils';
 import './Start.scss';
 
 const Start = () => {
-	useEffect(() => { Theme(0) }, []);
+	useEffect(() => { Theme(SavedTheme()) }, []);
 	return (
 		<Switch>
 			<Route exact path='/'>

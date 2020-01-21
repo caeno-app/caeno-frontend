@@ -1,9 +1,8 @@
 .dashboard-wrapper{
     & .greeting-card{
         padding: 20px;
-        // background: rgb(255,164,0);
-        // background: linear-gradient(37deg, #ffd27e, #ffffcf);
-        box-shadow: 0 0 5px 2px #cccccc;
+        // background: rgb(255, 245, 227);
+        box-shadow: 1px 2px 5px 2px var(--accent);
         & span{
             display: block;
             margin: 40px 0 8px 0;

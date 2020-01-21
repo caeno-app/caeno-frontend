@@ -1,0 +1,13 @@
+.theme-set{
+    display: block;
+    margin: 0 auto;
+    height: 40vw;
+    width: 40vw;
+    background-color: var(--bg-primary);
+    border-radius: 20vw;
+    box-shadow: var(--bg-secondary-border);
+    transition: background-color 350ms;
+}
+.profile-wrapper{
+    padding-top: 30vh;
+}

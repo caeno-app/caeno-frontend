@@ -11,6 +11,8 @@
 	box-sizing: border-box;
 }
 html, body{
+	min-height: 400px;
+	overflow-x: hidden;
 	margin: 0;
 	background-color: var(--bg-primary);
 	color: var(--text-color-primary);
