@@ -3,7 +3,7 @@ import SearchBar from '../Searchbar/Searchbar';
 import './Dashboard.scss';
 
 
-const Dashboard = () => {
+const Dashboard = _ => {
     const data = {
         today: new Date(),
         fname: 'Ryan'
@@ -22,6 +22,7 @@ const Dashboard = () => {
                 </h2>
                 <SearchBar />
             </div>
+
         </div>
     )
 }

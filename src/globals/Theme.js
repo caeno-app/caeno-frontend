@@ -5,7 +5,7 @@ const getFromStorage = () => {
     if(value === null || value.length === 0){
         return 0;
     }
-    return parseInt(value);
+    return Number(value);
 }
 const saveToStorage = (value) => {
     localStorage.setItem('theme', value);

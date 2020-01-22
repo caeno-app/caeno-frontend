@@ -35,7 +35,7 @@ const App = () => {
 		'/restaurants',
 		'/add',
 		'/nutrition',
-		'/profile'
+		'/profile',
 	];
 	return (
 		<Router initialEntries={pages} initialIndex={0}>

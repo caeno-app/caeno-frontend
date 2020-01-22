@@ -1,5 +1,7 @@
-import userdb from './userdb.js';
+import UserDB from './userdb.js';
+import FoodDB from './fooddb.js';
 
 export {
-    userdb
+    UserDB,
+    FoodDB
 }
