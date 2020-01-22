@@ -2,6 +2,31 @@
     padding: 20px;
     border-radius: 10px;
     margin: 20px;
+    font-size: 1.5rem;
     background-color: var(--bg-secondary);
     box-shadow: var(--bg-secondary-border);
+    & .menu-wrapper{
+        max-height: 0px;
+        transition: max-height 350ms;
+        overflow: hidden;
+        padding: 0 15px 0 15px;
+        & h3{
+            text-align: center;
+            font-size: 1.5rem;
+            font-family: 'Alata';
+        }
+        &.expanded{
+            overflow-y: scroll;
+            height: auto;
+            max-height: 1000px;
+        }
+        & .menu-item{
+            font-size: 1.1rem;
+            padding: 20px 0 15px 0;
+            border-top: 1px solid var(--text-color-disabled);
+            & span{
+                color: var(--text-color-disabled);
+            }
+        }
+    }
 }

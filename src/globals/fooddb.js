@@ -99,8 +99,7 @@ const restaurantsNearLocation = async (lat, lon) => {
             "distance_km": 0.949413158530285
         }
     ]
-}
-}
+}}
 export default {
     get: {
         location: restaurantsNearLocation
