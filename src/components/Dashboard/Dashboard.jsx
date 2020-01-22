@@ -22,7 +22,6 @@ const Dashboard = _ => {
                 </h2>
                 <SearchBar />
             </div>
-
         </div>
     )
 }

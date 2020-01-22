@@ -1,10 +1,40 @@
+.restaurants-wrapper{
+
+
+    & header{
+        padding: 50px 20px 20px 20px;
+        box-shadow: 1px 2px 5px 2px var(--accent);
+        margin-bottom: 20px;
+        & span{
+            font-size: 0.8rem;
+            color: var(--text-color-disabled);
+        }
+        & h2{
+            font-family: 'Raleway';
+            font-size: 10vw;
+            margin: 0;
+        }
+    }
+    & main{
+        padding: 20px 20px 100px 20px;
+        & h3{
+            font-family: 'Alata';
+            font-size: 1.5rem;
+        }
+    }
+
+}
 .restaurant-wrapper{
     padding: 20px;
     border-radius: 10px;
-    margin: 20px;
     font-size: 1.5rem;
+    margin-bottom: 20px;
     background-color: var(--bg-secondary);
     box-shadow: var(--bg-secondary-border);
+    & span{
+        font-size: 1rem;
+        color: var(--text-color-disabled);
+    }
     & .menu-wrapper{
         max-height: 0px;
         transition: max-height 350ms;

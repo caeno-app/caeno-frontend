@@ -1,10 +1,10 @@
 import React from 'react';
 import './Searchbar.scss';
 
-const Searchbar = () => {
+const Searchbar = ({placeholder="How can I help you today?"}) => {
     return (
         <div className="search-wrapper">
-            <input type="text" placeholder="How can I help you today?"/>
+            <input type="text" placeholder={placeholder}/>
         </div>
     )
 }
