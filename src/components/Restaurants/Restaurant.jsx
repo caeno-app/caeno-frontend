@@ -18,8 +18,11 @@ const Restaurant = ({name, brand_id, address}) => {
 
     const getAndDisplayRestaurantData = () => {
         setExpand(!expand);
+
         if(retrievedRestaurantData || brand_id === null) return;
+
         setRetrievedRestaurantData(true);
+    
         fetch(`https://www.nutritionix.com/nixapi/brands/${brand_id}`)
         .then(resp => {
             return resp.json();

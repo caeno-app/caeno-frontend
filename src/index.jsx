@@ -21,7 +21,7 @@ firebase.initializeApp(firebaseConfig);
 ReactDOM.render(
     <Router
         initialEntries={['/', '/login', '/app']}
-        initialIndex={2} 
+        initialIndex={0} 
     >
         <Start />
     </Router>,

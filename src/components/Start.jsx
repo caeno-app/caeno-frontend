@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { MemoryRouter as Router, Route, Switch } from 'react-router-dom';
+import { MemoryRouter as Router, Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
 import Theme, {current as SavedTheme} from '../globals/Theme';
 import BottomNavigation from './BottomNavigation/BottomNavigation';
 import Dashboard from './Dashboard/Dashboard';
@@ -12,20 +12,51 @@ import Profile from './Profile/Profile';
 import Restaurants from './Restaurants/Restaurants';
 import Nutrition from './Nutrition/Nutrition';
 import Add from './Add/Add';
-import { userdb } from '../globals/Utils';
+// import { userdb } from '../globals/userdb.js';
+import userdb from '../globals/userdb';
 import './Start.scss';
 
-const Start = () => {
-	useEffect(() => { Theme(SavedTheme()) }, []);
+const Start = (props) => {
+	useEffect(() => {
+		Theme(SavedTheme());
+		userdb.init();
+		userdb.login.check((user) => {
+			if(user) props.history.push('/app');
+		});
+		// userdb.logout();
+	}, []);
 	return (
 		<Switch>
 			<Route exact path='/'>
-				home
+				<Link to='/app' >
+					Go to App
+				</Link>
+				<Link to='/login'>
+					Go to Login
+				</Link>
+			</Route>
+			<Route path='/login'>
+				<Login />
 			</Route>
 			<Route path='/app'>
 				<App />
 			</Route>
 		</Switch>
+	);
+}
+const Login = () => {
+	const [loggedIn, setloggedIn] = useState(false);
+	const promptLogin = () => {
+		userdb.login.google(() => {
+			setloggedIn(true);
+		});
+	}
+	return (
+		<div>
+			THis is login pages
+			<button onClick={promptLogin}> login with google </button>
+			{loggedIn && <Redirect to="/app" />}
+		</div>
 	);
 }
 
@@ -51,4 +82,4 @@ const App = () => {
 	);
 }
 
-export default Start;
+export default withRouter(Start);
