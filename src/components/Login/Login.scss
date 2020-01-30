@@ -1,0 +1,21 @@
+.login-wrapper{
+    padding-top: 60vh;
+    height: 100vh;
+    & .Google{
+        display: block;
+        margin: 0 auto;
+        border: none;
+        border-radius: 25px;
+        height: 50px;
+        width: 220px;
+        background-color: var(--background-color);
+        color: white;
+        font-size: 1rem;
+        box-shadow: 0px 3px 10px 3px #000000;
+        transition: box-shadow 350ms;
+        font-family: "Roboto";
+        &:hover, &:active, &:focus{
+            box-shadow: 0px 3px 10px 5px #101010;
+        }
+    }
+}

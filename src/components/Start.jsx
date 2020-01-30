@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { MemoryRouter as Router, Route, Switch, Link, Redirect, withRouter } from 'react-router-dom';
+import { MemoryRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
 import Theme, {current as SavedTheme} from '../globals/Theme';
 import BottomNavigation from './BottomNavigation/BottomNavigation';
 import Dashboard from './Dashboard/Dashboard';
@@ -12,28 +12,22 @@ import Profile from './Profile/Profile';
 import Restaurants from './Restaurants/Restaurants';
 import Nutrition from './Nutrition/Nutrition';
 import Add from './Add/Add';
-// import { userdb } from '../globals/userdb.js';
-import userdb from '../globals/userdb';
+import Login from './Login/Login';
+import { UserDB } from '../globals/Utils';
 import './Start.scss';
 
-const Start = (props) => {
+const Start = ({history}) => {
 	useEffect(() => {
 		Theme(SavedTheme());
-		userdb.init();
-		userdb.login.check((user) => {
-			if(user) props.history.push('/app');
+		UserDB.init();
+		UserDB.login.check( user => {
+			history.push( user ? '/app' : '/login');
 		});
-		// userdb.logout();
-	}, []);
+		// UserDB.logout();
+	}, [history]);
 	return (
 		<Switch>
 			<Route exact path='/'>
-				<Link to='/app' >
-					Go to App
-				</Link>
-				<Link to='/login'>
-					Go to Login
-				</Link>
 			</Route>
 			<Route path='/login'>
 				<Login />
@@ -42,21 +36,6 @@ const Start = (props) => {
 				<App />
 			</Route>
 		</Switch>
-	);
-}
-const Login = () => {
-	const [loggedIn, setloggedIn] = useState(false);
-	const promptLogin = () => {
-		userdb.login.google(() => {
-			setloggedIn(true);
-		});
-	}
-	return (
-		<div>
-			THis is login pages
-			<button onClick={promptLogin}> login with google </button>
-			{loggedIn && <Redirect to="/app" />}
-		</div>
 	);
 }
 

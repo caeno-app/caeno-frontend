@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import SearchBar from '../Searchbar/Searchbar';
 import {UserDB} from '../../globals/Utils';
 import './Dashboard.scss';
+import WeatherSummary from './WeatherSummary';
 
 
 const Dashboard = ({name}) => {
     const [today] = useState(new Date());
     const getFirstName = () => {
-        return UserDB.get.user().name.split(' ')[0];
+        let fname = UserDB.get.meta().name.split(' ')[0]
+        return fname.charAt(0).toUpperCase() + fname.slice(1);
     }
 
     return (
@@ -22,6 +24,9 @@ const Dashboard = ({name}) => {
                     {`Good ${today.getHours() < 12 ? 'Morning' : 'Afternoon'}!`}
                 </h2>
                 <SearchBar />
+            </div>
+            <div className="cards-wrapper">
+                <WeatherSummary />
             </div>
         </div>
     )

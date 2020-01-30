@@ -1,0 +1,8 @@
+.weather-summary-wrapper{
+    & .card{
+        background-color: var(--bg-secondary);
+        box-shadow: var(--bg-secondary-border);
+        padding: 20px;
+        border-radius: 10px;
+    }
+}

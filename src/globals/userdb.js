@@ -54,42 +54,63 @@ function storageAvailable(type) {
 }
 
 /**
- * Checks if user data exists in localstorage, otherwise get from firestore
+ * @function setUserData
+ * Sets the userData into localstorage if localstorage exists
+ * @param {firebase user object} user
  */
-const getUserData = () => {
-    // const getUserDataFromFirebase = () => {
-    //     let auth = firebase.auth();
-    //     return {
-    //         name: auth.getDisplayName(),
-    //         email: auth.getEmail(),
-    //         provider: auth.getProviderId(),
-    //         anon: auth.isAnonymous(),
-    //         id: auth.getUid()
-    //     }
-    // }
-    // if(storageAvailable('localStorage')){
-    //     let userData = localStorage.getItem('user');
-    //     if(userData !== null) return userData;
+const setUserData = (user) => {
+    if(!storageAvailable('localStorage')) return;
 
-    //     localStorage.setItem('user', getUserDataFromFirebase());
-    //     return userData;
-    // }
-    // return getUserDataFromFirebase();
-    console.log(firebase.auth().currentUser());
-    return {
-        name: "sdf"
-    }
+    let userData = {
+        name: user.displayName,
+        email: user.email,
+        emailverified: user.emailVerified,
+        anon: user.isAnonymous,
+        id: user.uid
+    };
+
+    localStorage.setItem('user', JSON.stringify(userData));
+    return userData;
 }
 
+/**
+ * @function getUserData - gets stored user meta data from firebase
+ * returns parsed json
+ */
+const getUserData = () => {
+    if(!storageAvailable('localStorage')) return;
+    return JSON.parse(localStorage.getItem('user'));
+}
+
+/**
+ * Checks if user is currently logged in, and set localstorage if true
+ * @param {function} callback 
+ */
 const checkIfLoggedIn = ( callback ) => {
     firebase.auth().onAuthStateChanged( user => {
-        if(user){
-            callback(true);
-        }
-        callback(false);
+        if(user) setUserData(user);
+        callback(user);
     });
 }
 
+const setWeather = (weather) => {
+    let weatherData = {
+        ...weather,
+        timestamp: (new Date()).toISOString()
+    }
+    localStorage.setItem('weather', JSON.stringify(weatherData));
+}
+const getWeather = (weather) => {
+    let weatherData = localStorage.getItem('weather');
+    if(weatherData !== null && (new Date() - new Date(weatherData.timestamp) > 43200))
+        weatherData = null;
+    return weatherData;
+}
+
+/**
+ * @function promptLoginGoogle calls firebase login auth using google provider
+ * @param {function} callback 
+ */
 const promptLoginGoogle = ( callback ) => {
     firebase.auth().signInWithRedirect(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -115,19 +136,11 @@ const promptLoginGoogle = ( callback ) => {
 
 const logout = (cb, err=defaultError) => {
     firebase.auth().signOut().then(function() {
-
+        localStorage.clear();
     }).catch(function(error) {
         err(error);
     });      
 }
-
-// const getUserData = (cb) => {
-//     cb({
-//         id: 'd3hsDA3',
-//         fname: 'Ryan',
-//         lname: 'Yang',
-//     });
-// }
 
 const defaultError = (error) => {
     alert(error);
@@ -140,7 +153,11 @@ export default {
         google: promptLoginGoogle,
     },
     logout: logout,
+    set:{
+        weather: setWeather
+    },
     get: {
-        user: getUserData
+        meta: getUserData,
+        weather: getWeather
     }
 }
