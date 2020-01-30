@@ -1,4 +1,5 @@
 import React from 'react';
+import {UserDB} from '../../globals/Utils';
 
 const Add = () => {
     return (
