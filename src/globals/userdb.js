@@ -12,16 +12,15 @@ let provider;
  */
 const init = () => {
     db = firebase.firestore(); 
-    // db.enablePersistence().catch( err => {
-    //     if (err.code === 'failed-precondition') {
-    //         // Multiple tabs open, persistence can only be enabled
-    //         // in one tab at a a time.
-    //     } else if (err.code === 'unimplemented') {
-    //         // The current browser does not support all of the
-    //         // features required to enable persistence
-    //     }
-    // });
-    provider = new firebase.auth.GoogleAuthProvider();
+    db.enablePersistence().catch( err => {
+        if (err.code === 'failed-precondition') {
+            // Multiple tabs open, persistence can only be enabled
+            // in one tab at a a time.
+        } else if (err.code === 'unimplemented') {
+            // The current browser does not support all of the
+            // features required to enable persistence
+        }
+    });
 }
 /**
  * Check if local storage exists: from MDN
@@ -29,10 +28,10 @@ const init = () => {
  * @param {string of storage type} type 
  */
 function storageAvailable(type) {
-    var storage;
+    let storage;
     try {
         storage = window[type];
-        var x = '__test__';
+        let x = '__test__';
         storage.setItem(x, x);
         storage.removeItem(x);
         return true;
@@ -113,30 +112,23 @@ const getWeather = (weather) => {
  */
 const promptLoginGoogle = ( callback ) => {
     firebase.auth().signInWithRedirect(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        console.log(user);
-        console.log(result);
+        let token = result.credential.accessToken;
+        let user = result.user;
         // callback(result);
-        // ...
       }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        let email = error.email;
+        let credential = error.credential;
         console.log(error);
       });      
 }
 
 const logout = (cb, err=defaultError) => {
     firebase.auth().signOut().then(function() {
+        let theme = localStorage.getItem('theme');
         localStorage.clear();
+        localStorage.setItem('theme', theme);
     }).catch(function(error) {
         err(error);
     });      
