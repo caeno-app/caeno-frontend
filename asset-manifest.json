@@ -1,27 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.0b533704.chunk.css",
-    "main.js": "/static/js/main.108442ff.chunk.js",
-    "main.js.map": "/static/js/main.108442ff.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.444fa3bd.js",
-    "runtime-main.js.map": "/static/js/runtime-main.444fa3bd.js.map",
-    "static/js/2.184a6081.chunk.js": "/static/js/2.184a6081.chunk.js",
-    "static/js/2.184a6081.chunk.js.map": "/static/js/2.184a6081.chunk.js.map",
+    "main.css": "/static/css/main.95a7a511.chunk.css",
+    "main.js": "/static/js/main.8d011f03.chunk.js",
+    "main.js.map": "/static/js/main.8d011f03.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.897f9d30.js",
+    "runtime-main.js.map": "/static/js/runtime-main.897f9d30.js.map",
+    "static/css/2.ec221554.chunk.css": "/static/css/2.ec221554.chunk.css",
+    "static/js/2.052c8af6.chunk.js": "/static/js/2.052c8af6.chunk.js",
+    "static/js/2.052c8af6.chunk.js.map": "/static/js/2.052c8af6.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.9eca25fd311191dba64b3822cc176af4.js": "/precache-manifest.9eca25fd311191dba64b3822cc176af4.js",
+    "precache-manifest.f419c56475c8780defe48d16880772f2.js": "/precache-manifest.f419c56475c8780defe48d16880772f2.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.0b533704.chunk.css.map": "/static/css/main.0b533704.chunk.css.map",
-    "static/js/2.184a6081.chunk.js.LICENSE": "/static/js/2.184a6081.chunk.js.LICENSE",
+    "static/css/2.ec221554.chunk.css.map": "/static/css/2.ec221554.chunk.css.map",
+    "static/css/main.95a7a511.chunk.css.map": "/static/css/main.95a7a511.chunk.css.map",
+    "static/js/2.052c8af6.chunk.js.LICENSE": "/static/js/2.052c8af6.chunk.js.LICENSE",
     "static/media/add.fee7b835.svg": "/static/media/add.fee7b835.svg",
     "static/media/dash.78dba18e.svg": "/static/media/dash.78dba18e.svg",
+    "static/media/logo.fe1e59e8.svg": "/static/media/logo.fe1e59e8.svg",
     "static/media/nutrition.4975f468.svg": "/static/media/nutrition.4975f468.svg",
     "static/media/profile.5cf8d230.svg": "/static/media/profile.5cf8d230.svg",
     "static/media/restaurant.b828c8f5.svg": "/static/media/restaurant.b828c8f5.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.444fa3bd.js",
-    "static/js/2.184a6081.chunk.js",
-    "static/css/main.0b533704.chunk.css",
-    "static/js/main.108442ff.chunk.js"
+    "static/js/runtime-main.897f9d30.js",
+    "static/css/2.ec221554.chunk.css",
+    "static/js/2.052c8af6.chunk.js",
+    "static/css/main.95a7a511.chunk.css",
+    "static/js/main.8d011f03.chunk.js"
   ]
 }
