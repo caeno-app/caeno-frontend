@@ -23,6 +23,7 @@ const Start = ({history}) => {
 		UserDB.login.check( user => {
 			history.push( user ? '/app' : '/login');
 		});
+		UserDB.get.location();
 		// UserDB.logout();
 	}, [history]);
 	return (

@@ -9,7 +9,6 @@ const WeatherSummary = () => {
     useEffect(() => {
         // let weatherData = UserDB.get.weather();
         // if(weatherData !== null) return setWeather(weatherData);
-
         let geo = navigator.geolocation;
         if (geo) {
             geo.getCurrentPosition( 
@@ -26,9 +25,7 @@ const WeatherSummary = () => {
     }, [setPosition, setWeather]);
 
     useEffect(() => {
-        // console.log("positoin")
         if(position === null) return;
-        // console.log("positoin not null")
         let weatherAPI = `https://api.weather.gov/points/${position[0]},${position[1]}`;
         fetch(weatherAPI).then(res => res.json()).then(res => {
             console.log(res);

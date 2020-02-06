@@ -4,7 +4,6 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 let db;
-let provider;
 
 /**
  * @function init
@@ -22,6 +21,7 @@ const init = () => {
         }
     });
 }
+
 /**
  * Check if local storage exists: from MDN
  * https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
@@ -106,22 +106,19 @@ const getWeather = (weather) => {
     return weatherData;
 }
 
-/**
- * @function promptLoginGoogle calls firebase login auth using google provider
- * @param {function} callback 
- */
-const promptLoginGoogle = ( callback ) => {
-    firebase.auth().signInWithRedirect(provider).then(function(result) {
-        let token = result.credential.accessToken;
-        let user = result.user;
-        // callback(result);
-      }).catch(function(error) {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        let email = error.email;
-        let credential = error.credential;
-        console.log(error);
-      });      
+const getLocation = () => {
+    let geo = navigator.geolocation;
+    if (geo) {
+        geo.getCurrentPosition( 
+            pos => {
+                alert("Got user position: ", JSON.stringify(pos));
+                // setPosition([pos.coords.latitude, pos.coords.longitude]);
+            }, err => {
+                console.log(err);
+            },
+            {timeout: 4000}
+        );
+    }
 }
 
 const logout = (cb, err=defaultError) => {
@@ -142,7 +139,7 @@ export default {
     init: init,
     login: {
         check: checkIfLoggedIn,
-        google: promptLoginGoogle,
+        // google: promptLoginGoogle,
     },
     logout: logout,
     set:{
@@ -150,6 +147,7 @@ export default {
     },
     get: {
         meta: getUserData,
-        weather: getWeather
+        weather: getWeather,
+        location: getLocation
     }
 }
