@@ -1,8 +1,32 @@
 .weather-summary-wrapper{
+    & span{
+        font-size: 1.8rem;
+        font-family: 'Alata';
+        display: inline-block;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
     & .card{
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr;
         background-color: var(--bg-secondary);
         box-shadow: var(--bg-secondary-border);
-        padding: 20px;
         border-radius: 10px;
+        margin-bottom: 15px;
+        overflow: hidden;
+        & .image{
+            filter: blur(1px);
+            width: 90px;
+            height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+        & .content{
+            padding: 15px 15px 0px 15px;
+            & span{
+                font-size: 2rem;
+            }
+        }
     }
 }

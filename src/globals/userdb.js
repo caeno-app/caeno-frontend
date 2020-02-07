@@ -93,6 +93,7 @@ const checkIfLoggedIn = ( callback ) => {
 }
 
 const setWeather = (weather) => {
+    console.log(weather);
     let weatherData = {
         ...weather,
         timestamp: (new Date()).toISOString()
@@ -101,24 +102,30 @@ const setWeather = (weather) => {
 }
 const getWeather = (weather) => {
     let weatherData = localStorage.getItem('weather');
-    if(weatherData !== null && (new Date() - new Date(weatherData.timestamp) > 43200))
+    if(weatherData !== null && (new Date() - new Date(weatherData.timestamp) < 43200))
         weatherData = null;
     return weatherData;
 }
 
 const getLocation = () => {
     let geo = navigator.geolocation;
-    if (geo) {
+    if(geo){
         geo.getCurrentPosition( 
             pos => {
-                alert("Got user position: ", JSON.stringify(pos));
-                // setPosition([pos.coords.latitude, pos.coords.longitude]);
+                localStorage.setItem('location', JSON.stringify({
+                    lat: pos.coords.latitude,
+                    lng: pos.coords.longitude,
+                    accuracy: pos.coords.accuracy
+                }));
             }, err => {
                 console.log(err);
             },
             {timeout: 4000}
         );
     }
+}
+const getSavedLocation = () => {
+    return localStorage.getItem('location');
 }
 
 const logout = (cb, err=defaultError) => {
@@ -148,6 +155,7 @@ export default {
     get: {
         meta: getUserData,
         weather: getWeather,
-        location: getLocation
+        location: getLocation,
+        savedLocation: getSavedLocation
     }
 }

@@ -23,7 +23,6 @@ const Start = ({history}) => {
 		UserDB.login.check( user => {
 			history.push( user ? '/app' : '/login');
 		});
-		UserDB.get.location();
 		// UserDB.logout();
 	}, [history]);
 	return (
@@ -41,6 +40,10 @@ const Start = ({history}) => {
 }
 
 const App = () => {
+	useEffect(() => {
+		UserDB.get.location();
+	}, []);
+	
 	const pages = [
 		'/dash',
 		'/restaurants',

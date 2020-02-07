@@ -3,51 +3,53 @@ import {UserDB} from '../../globals/Utils';
 import './WeatherSummary.scss';
 
 const WeatherSummary = () => {
-    const [position, setPosition] = useState(null);
     const [weather, setWeather] = useState(null);
-
+    /**
+     * Weather data should only be refreshed if the weather data has expired
+     * or does not exist.
+     * @TODO should be updated to include position changes as well
+     */
     useEffect(() => {
-        // let weatherData = UserDB.get.weather();
-        // if(weatherData !== null) return setWeather(weatherData);
-        let geo = navigator.geolocation;
-        if (geo) {
-            geo.getCurrentPosition( 
-                pos => {
-                    alert("Got user position: ", JSON.stringify(pos));
-                    setPosition([pos.coords.latitude, pos.coords.longitude]);
-                }, err => {
-                    console.log(err);
-                },
-                {timeout: 4000}
-            );
-        }
-        // console.log(geo, weatherData === null);
-    }, [setPosition, setWeather]);
-
-    useEffect(() => {
+        let weatherData = UserDB.get.weather();
+        if(weatherData !== null) return setWeather(JSON.parse(weatherData));
+        let position = JSON.parse(UserDB.get.savedLocation());
         if(position === null) return;
-        let weatherAPI = `https://api.weather.gov/points/${position[0]},${position[1]}`;
+        let weatherAPI = `https://api.weather.gov/points/${position.lat},${position.lng}`;
         fetch(weatherAPI).then(res => res.json()).then(res => {
-            console.log(res);
             if(res.properties.forecast){
                 fetch(res.properties.forecast).then(res => res.json()).then(res => {
-                    alert(JSON.stringify(res.properties[0]));
-                    UserDB.set.weather(res.properties[0]);
-                    setWeather(res.properties[0]);
+                    UserDB.set.weather(res.properties);
+                    setWeather(res.properties);
                 });
             }
         });
-    }, [position]);
-
-    return (
+    }, [setWeather]);
+    
+    return weather === null ? "" : (
         <div className="weather-summary-wrapper">
-            {weather !== null &&
-                <div className="card">
-                    {JSON.stringify(weather)}
-                </div>
-            }
+            <span>Weather</span>
+            <WeatherCard data={weather.periods[0]} />
         </div>
     );
 }
-
+const WeatherCard = ({data}) => {
+    const tempColor = () => {
+        if(data.temperature < 33) return '#009bd4';
+        if(data.temperature < 63) return '#855ee0';
+        if(data.temperature < 83) return '#ff9900';
+        return '#ff3c00';
+    }
+    return (
+        <div className="card">
+            <div className="image" style={{backgroundImage: `url("${data.icon}")`}}></div>
+            <div className="content">
+                {data.name}
+                <br />
+                <span style={{color:  tempColor()}}>
+                    {data.temperature} °{data.temperatureUnit}
+                </span>
+            </div>
+        </div>
+    );
+}
 export default WeatherSummary;

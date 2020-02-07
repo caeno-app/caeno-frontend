@@ -26,7 +26,7 @@ const Dashboard = ({name}) => {
                 <SearchBar />
             </div>
             <div className="cards-wrapper">
-                {/* <WeatherSummary /> */}
+                <WeatherSummary />
             </div>
         </div>
     )
