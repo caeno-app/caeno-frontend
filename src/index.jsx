@@ -4,6 +4,7 @@ import './index.css';
 import Start from './components/Start';
 import { MemoryRouter as Router } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
+import {UserDB} from './globals/Utils';
 import firebase from 'firebase/app';
 
 
@@ -17,16 +18,21 @@ const firebaseConfig = {
     appId: "1:710477581702:web:c6ad220d1e33d4d13db007"
 };
 firebase.initializeApp(firebaseConfig);
+try{
+    ReactDOM.render(
+        <Router
+            initialEntries={['/', '/login', '/app']}
+            initialIndex={0} 
+        >
+            <Start />
+        </Router>,
+        document.getElementById('root')
+    );
+}
+catch{
+    UserDB.logout();
+}
 
-ReactDOM.render(
-    <Router
-        initialEntries={['/', '/login', '/app']}
-        initialIndex={0} 
-    >
-        <Start />
-    </Router>,
-    document.getElementById('root')
-);
 
 
 

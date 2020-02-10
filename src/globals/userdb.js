@@ -93,7 +93,6 @@ const checkIfLoggedIn = ( callback ) => {
 }
 
 const setWeather = (weather) => {
-    console.log(weather);
     let weatherData = {
         ...weather,
         timestamp: (new Date()).toISOString()
@@ -102,7 +101,7 @@ const setWeather = (weather) => {
 }
 const getWeather = (weather) => {
     let weatherData = localStorage.getItem('weather');
-    if(weatherData !== null && (new Date() - new Date(weatherData.timestamp) < 43200))
+    if(weatherData !== null && (new Date() - new Date(weatherData.timestamp) > 43200))
         weatherData = null;
     return weatherData;
 }

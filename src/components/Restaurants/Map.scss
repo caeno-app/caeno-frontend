@@ -1,0 +1,16 @@
+.leaflet-container {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: var(--bg-secondary);
+}
+.leaflet-popup-content-wrapper{
+    background-color:var(--bg-secondary);
+}
+.leaflet-popup-tip{
+    background-color:var(--bg-secondary);
+}
+.map-popup{
+    color: var(--text-color-primary);
+}
