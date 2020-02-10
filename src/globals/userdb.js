@@ -132,6 +132,7 @@ const logout = (cb, err=defaultError) => {
         let theme = localStorage.getItem('theme');
         localStorage.clear();
         localStorage.setItem('theme', theme);
+        window.location.reload();
     }).catch(function(error) {
         err(error);
     });      
