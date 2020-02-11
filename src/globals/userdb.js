@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import * as firebase from 'firebase/app';
+import Swal from 'sweetalert2';
 import 'firebase/auth';
 import 'firebase/firestore';
 
@@ -106,7 +107,7 @@ const getWeather = (weather) => {
     return weatherData;
 }
 
-const getLocation = () => {
+const getLocation = (callback=()=>{return;}) => {
     let geo = navigator.geolocation;
     if(geo){
         geo.getCurrentPosition( 
@@ -116,8 +117,14 @@ const getLocation = () => {
                     lng: pos.coords.longitude,
                     accuracy: pos.coords.accuracy
                 }));
+                callback(pos.coords);
             }, err => {
-                console.log(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `Can't get location!`,
+                    footer: '<a href="https://support.google.com/chrome/answer/142065">Why do I have this issue?</a>'
+                  })
             },
             {timeout: 4000}
         );

@@ -18,6 +18,20 @@
 
         & .map{
             height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            & .error{
+                background-color: var(--bg-secondary);
+                padding: 40px;
+                height: 100%;
+                width: 100%;
+                text-align: center;
+                & button{
+                    border: none;
+                    border-radius: 0;
+                    padding: 10px;
+                }
+            }
         }
         & h3{
             font-family: 'Alata';

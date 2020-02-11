@@ -5,10 +5,28 @@ import SearchBar from '../Searchbar/Searchbar';
 import Map from './Map';
 import './Restaurants.scss';
 
+const ErrorMap = ({setLocation}) => {
+    const renewLocation = () => {
+        // console.log("Renewing Location permissions");
+        UserDB.get.location((coords) => {
+            setLocation([coords.lat, coords.lng]);
+        });
+    }
+    return (
+        <div className="error">
+            Enable Location to view restaurants
+            <br />
+            <br />
+            <button className="enable-location" onClick={renewLocation}>
+                Enable Location
+            </button>
+        </div>
+    );
+}
+
 const Restaurants = () => {
     const [restaurantsNearMe, setRestaurantsNearMe] = useState([]);
-    const savedLocation = JSON.parse(UserDB.get.savedLocation());
-    const [userLocation, setUserLocation] = useState([savedLocation.lat, savedLocation.lng]);
+    const [userLocation, setUserLocation] = useState(JSON.parse(UserDB.get.savedLocation()));
 
     useEffect( () => {
         (async () => {
@@ -27,7 +45,9 @@ const Restaurants = () => {
             </header>
             <main>
                 <div className="map">
-                    <Map center={userLocation} data={restaurantsNearMe}/>
+                    {userLocation === null 
+                        ? <ErrorMap setLocation={setUserLocation}/>
+                        : <Map center={[userLocation.lat, userLocation.lng]} data={restaurantsNearMe}/>}
                 </div>
                 <h3>Restaurants Near You</h3>
                 {restaurantsNearMe.map(restaurantData => {
@@ -37,4 +57,5 @@ const Restaurants = () => {
         </div>
     )
 }
+
 export default Restaurants;
