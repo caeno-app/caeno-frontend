@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Restaurants.scss';
 
 const RestaurantMenuItem = ({food_name, nf_calories, index}) => {  

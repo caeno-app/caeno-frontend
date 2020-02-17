@@ -1,9 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {UserDB} from '../../globals/Utils';
+import LocationContext from '../../context/LocationContext';
 import './WeatherSummary.scss';
 
 const WeatherSummary = () => {
     const [weather, setWeather] = useState(null);
+    const position = useContext(LocationContext);
+    
     /**
      * Weather data should only be refreshed if the weather data has expired
      * or does not exist.
@@ -12,18 +15,17 @@ const WeatherSummary = () => {
     useEffect(() => {
         let weatherData = UserDB.get.weather();
         if(weatherData !== null) return setWeather(JSON.parse(weatherData));
-        let position = JSON.parse(UserDB.get.savedLocation());
         if(position === null) return;
         let weatherAPI = `https://api.weather.gov/points/${position.lat},${position.lng}`;
-        fetch(weatherAPI).then(res => res.json()).then(res => {
-            if(res.properties.forecast){
-                fetch(res.properties.forecast).then(res => res.json()).then(res => {
-                    UserDB.set.weather(res.properties);
-                    setWeather(res.properties);
-                });
-            }
-        });
-    }, [setWeather]);
+        // fetch(weatherAPI).then(res => res.json()).then(res => {
+        //     if(res.properties.forecast){
+        //         fetch(res.properties.forecast).then(res => res.json()).then(res => {
+        //             UserDB.set.weather(res.properties);
+        //             setWeather(res.properties);
+        //         });
+        //     }
+        // });
+    }, [setWeather, position]);
     
     return weather === null ? "" : (
         <div className="weather-summary-wrapper">
@@ -41,13 +43,13 @@ const WeatherCard = ({data}) => {
     }
     return (
         <div className="card">
-            <div className="image" style={{backgroundImage: `url("${data.icon}")`}}></div>
             <div className="content">
-                {data.name}
+                <h3 style={{color:  tempColor()}}>
+                    {data.temperature}°{/*data.temperatureUnit*/}
+                </h3>
+                <span className="">{data.name}</span>
                 <br />
-                <span style={{color:  tempColor()}}>
-                    {data.temperature} °{data.temperatureUnit}
-                </span>
+                <p>{data.detailedForecast}</p>
             </div>
         </div>
     );

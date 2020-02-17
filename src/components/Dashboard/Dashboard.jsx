@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import SearchBar from '../Searchbar/Searchbar';
 import {UserDB} from '../../globals/Utils';
 import './Dashboard.scss';
 import WeatherSummary from './WeatherSummary';
 
 
-const Dashboard = ({name}) => {
+const Dashboard = () => {
     const [today] = useState(new Date());
     const getFirstName = () => {
-        let fname = UserDB.get.meta().name.split(' ')[0]
+        let fname = UserDB.get.user('name').split(' ')[0]
         return fname.charAt(0).toUpperCase() + fname.slice(1);
     }
 

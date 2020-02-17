@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FoodDB, UserDB } from '../../globals/Utils.js';
 import Restaurant from './Restaurant';
 import SearchBar from '../Searchbar/Searchbar';
 import Map from './Map';
+import LocationContext, {getLocation} from '../../context/LocationContext';
 import './Restaurants.scss';
 
 const ErrorMap = ({setLocation}) => {
     const renewLocation = () => {
-        // console.log("Renewing Location permissions");
-        UserDB.get.location((coords) => {
-            setLocation([coords.lat, coords.lng]);
-        });
+        // getLocation();
     }
     return (
         <div className="error">
@@ -25,15 +23,16 @@ const ErrorMap = ({setLocation}) => {
 }
 
 const Restaurants = () => {
+    const userLocation = useContext(LocationContext);
     const [restaurantsNearMe, setRestaurantsNearMe] = useState([]);
-    const [userLocation, setUserLocation] = useState(JSON.parse(UserDB.get.savedLocation()));
 
     useEffect( () => {
         (async () => {
-            let data = await FoodDB.get.location(30, 32);
-            setRestaurantsNearMe(data.locations);
+            let data = await FoodDB.get.location(userLocation.lat, userLocation.lng);
+            setRestaurantsNearMe(data);
         })();
-    }, []);
+    }, [userLocation]);
+
     return (
         <div className="restaurants-wrapper">
             <header>
@@ -45,8 +44,8 @@ const Restaurants = () => {
             </header>
             <main>
                 <div className="map">
-                    {userLocation === null 
-                        ? <ErrorMap setLocation={setUserLocation}/>
+                    {userLocation.accuracy <= 0 
+                        ? <ErrorMap />
                         : <Map center={[userLocation.lat, userLocation.lng]} data={restaurantsNearMe}/>}
                 </div>
                 <h3>Restaurants Near You</h3>

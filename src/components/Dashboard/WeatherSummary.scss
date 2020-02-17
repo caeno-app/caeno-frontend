@@ -15,16 +15,21 @@
         border-radius: 10px;
         margin-bottom: 15px;
         overflow: hidden;
-        & .image{
-            width: 90px;
-            height: 100%;
-            background-position: center;
-            background-size: cover;
-        }
         & .content{
-            padding: 15px 15px 0px 15px;
+            padding: 20px;
+            & h3{
+                font-size: 7rem;
+                margin: 20px 0 0 0;
+                line-height: calc(7rem - 30px);
+            }
             & span{
-                font-size: 2rem;
+                font-size: 1.5rem;
+                font-family: 'Josefin Sans', sans-serif;
+            }
+            & p{
+                font-family: 'Alata';
+                font-size: 0.85rem;
+                color: var(--text-color-secondary);
             }
         }
     }
