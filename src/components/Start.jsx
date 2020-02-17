@@ -25,7 +25,7 @@ const Start = ({history}) => {
 		UserDB.login.check( user => {
 			history.push( user ? '/app' : '/login');
 		});
-		console.log("v0.1.1");
+		console.log("v0.1.2");
 	}, [history]);
 	return (
 		<Switch>
@@ -51,11 +51,11 @@ const App = () => {
 	];
 	const [userLocation, setUserLocation] = useState(getDefaultLocation);
 	const promptLocation = async() => {
-		getLocation().then(location => {
-			setUserLocation(location);
-		}).catch((err) => {
-			console.error(err);
-		});
+		// getLocation().then(location => {
+		// 	setUserLocation(location);
+		// }).catch((err) => {
+		// 	console.error(err);
+		// });
 	}
 	useEffect(() => {
 		promptLocation();
@@ -63,7 +63,7 @@ const App = () => {
 
 	return (
 		<LocationContext.Provider value={{...userLocation, promptLocation: promptLocation}}>
-			<Router initialEntries={pages} initialIndex={0}>
+			<Router initialEntries={pages} initialIndex={4}>
 				<Switch>
 					<Route exact path='/dash' component={Dashboard} />
 					<Route exact path='/restaurants' component={Restaurants} />

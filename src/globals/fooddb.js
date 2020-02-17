@@ -14,7 +14,7 @@ const endpoint = `http://172.112.215.241`;
  */
 const restaurantsNearLocation = async (lat, lng) => {
     try {
-        let res = await fetch(`${endpoint}/el/restaurantslocation?dist=10&lat=${lat}&lng=${lng}`);
+        let res = await fetch(`${endpoint}/api/elrestaurants?dist=10&lat=${lat}&lng=${lng}`);
         res = await res.json();
         return res;
     } catch (err) {

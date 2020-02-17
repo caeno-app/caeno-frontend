@@ -3,8 +3,6 @@
         display: grid;
         grid-template-columns: repeat(4, 70vw) 40px;
         column-gap: 20px;
-        padding-left: 60px;
-        padding-right: 80px;
         overflow-x: scroll;
         scroll-snap-type: y mandatory;
         overscroll-behavior: none;
@@ -15,7 +13,6 @@
             height: 0;
         }
     }
-
     & span{
         font-size: 1.8rem;
         font-family: 'Alata';
@@ -33,12 +30,12 @@
         & .content{
             padding: 20px;
             & h3{
-                font-size: 7rem;
+                font-size: 6.5rem;
                 margin: 20px 0 0 0;
                 line-height: calc(7rem - 30px);
             }
             & span{
-                font-size: 1.5rem;
+                font-size: 1.4rem;
                 font-family: 'Josefin Sans', sans-serif;
             }
             & p{
