@@ -5,8 +5,8 @@ import './WeatherSummary.scss';
 
 const WeatherSummary = () => {
     const [weather, setWeather] = useState(null);
-    const position = useContext(LocationContext);
-    
+    const userLocation = useContext(LocationContext);
+
     /**
      * Weather data should only be refreshed if the weather data has expired
      * or does not exist.
@@ -15,17 +15,17 @@ const WeatherSummary = () => {
     useEffect(() => {
         let weatherData = UserDB.get.weather();
         if(weatherData !== null) return setWeather(JSON.parse(weatherData));
-        if(position === null) return;
-        let weatherAPI = `https://api.weather.gov/points/${position.lat},${position.lng}`;
-        // fetch(weatherAPI).then(res => res.json()).then(res => {
-        //     if(res.properties.forecast){
-        //         fetch(res.properties.forecast).then(res => res.json()).then(res => {
-        //             UserDB.set.weather(res.properties);
-        //             setWeather(res.properties);
-        //         });
-        //     }
-        // });
-    }, [setWeather, position]);
+        if(userLocation.accuracy <= 0) return;
+        let weatherAPI = `https://api.weather.gov/points/${userLocation.lat},${userLocation.lng}`;
+        fetch(weatherAPI).then(res => res.json()).then(res => {
+            if(res.properties.forecast){
+                fetch(res.properties.forecast).then(res => res.json()).then(res => {
+                    UserDB.set.weather(res.properties);
+                    setWeather(res.properties);
+                });
+            }
+        });
+    }, [setWeather, userLocation]);
     
     return weather === null ? "" : (
         <div className="weather-summary-wrapper">

@@ -25,6 +25,7 @@ const Start = ({history}) => {
 		UserDB.login.check( user => {
 			history.push( user ? '/app' : '/login');
 		});
+		console.log("v0.1.1");
 	}, [history]);
 	return (
 		<Switch>
