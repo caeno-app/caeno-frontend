@@ -1,5 +1,5 @@
 import React from 'react';
-import {UserDB} from '../../globals/Utils';
+// import {UserDB} from '../../globals/Utils';
 import './Add.scss';
 
 const Add = () => {

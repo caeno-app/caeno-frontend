@@ -1,21 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { FoodDB, UserDB } from '../../globals/Utils.js';
+import { FoodDB } from '../../globals/Utils.js';
 import Restaurant from './Restaurant';
 import SearchBar from '../Searchbar/Searchbar';
 import Map from './Map';
-import LocationContext, {getLocation} from '../../context/LocationContext';
+import LocationContext from '../../context/LocationContext';
 import './Restaurants.scss';
 
-const ErrorMap = ({setLocation}) => {
-    const renewLocation = () => {
-        // getLocation();
-    }
+const ErrorMap = ({promptLocation}) => {
     return (
         <div className="error">
             Enable Location to view restaurants
             <br />
             <br />
-            <button className="enable-location" onClick={renewLocation}>
+            <button className="enable-location" onClick={promptLocation}>
                 Enable Location
             </button>
         </div>
@@ -27,10 +24,13 @@ const Restaurants = () => {
     const [restaurantsNearMe, setRestaurantsNearMe] = useState([]);
 
     useEffect( () => {
+        if(userLocation.accuracy <= 0) return;
+
         (async () => {
             let data = await FoodDB.get.location(userLocation.lat, userLocation.lng);
             setRestaurantsNearMe(data);
         })();
+
     }, [userLocation]);
 
     return (
@@ -45,7 +45,7 @@ const Restaurants = () => {
             <main>
                 <div className="map">
                     {userLocation.accuracy <= 0 
-                        ? <ErrorMap />
+                        ? <ErrorMap promptLocation={userLocation.promptLocation}/>
                         : <Map center={[userLocation.lat, userLocation.lng]} data={restaurantsNearMe}/>}
                 </div>
                 <h3>Restaurants Near You</h3>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Map as LMap, TileLayer, CircleMarker, Popup } from 'react-leaflet';
-import Restaurant from './Restaurant';
+// import Restaurant from './Restaurant';
 import 'leaflet/dist/leaflet.css';
 import './Map.scss';
 

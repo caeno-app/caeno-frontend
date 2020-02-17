@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import {UserDB} from '../../globals/Utils';
+import React, {useEffect} from 'react';
 import {ReactComponent as Avocado} from '../../assets/logo.svg';
 import firebase from 'firebase';
 import * as firebaseui from 'firebaseui';

@@ -3,7 +3,7 @@
  * @description Start component to route user to either login or app page
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MemoryRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
 import Theme, {current as SavedTheme} from '../globals/Theme';
 import BottomNavigation from './BottomNavigation/BottomNavigation';
@@ -14,7 +14,7 @@ import Nutrition from './Nutrition/Nutrition';
 import Add from './Add/Add';
 import Login from './Login/Login';
 import { UserDB } from '../globals/Utils';
-import LocationContext from '../context/LocationContext';
+import LocationContext, {getLocation, getDefaultLocation} from '../context/LocationContext';
 import './Start.scss';
 
 
@@ -48,8 +48,20 @@ const App = () => {
 		'/nutrition',
 		'/profile',
 	];
+	const [userLocation, setUserLocation] = useState(getDefaultLocation);
+	const promptLocation = async() => {
+		getLocation().then(location => {
+			setUserLocation(location);
+		}).catch((err) => {
+			console.error(err);
+		});
+	}
+	useEffect(() => {
+		promptLocation();
+	}, [setUserLocation]);
+
 	return (
-		<LocationContext.Provider value={{lat: 0, lng: 0, accuracy: -1}}>
+		<LocationContext.Provider value={{...userLocation, promptLocation: promptLocation}}>
 			<Router initialEntries={pages} initialIndex={0}>
 				<Switch>
 					<Route exact path='/dash' component={Dashboard} />

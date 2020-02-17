@@ -35,8 +35,8 @@ const setUserData = (user) => {
         anon: user.isAnonymous,
         id: user.uid
     };
-
     localStorage.setItem('user', JSON.stringify(userData));
+    currentUser.user = userData;
     return userData;
 }
 /**
@@ -65,11 +65,11 @@ const getUser = (property=null) => {
     if(property === null)
         return currentUser.user;
 
-    if(currentUser[property] !== null)
+    if(currentUser.user !== null && currentUser.user[property] !== null)
         return currentUser.user[property];
 
     switch(property){
-        case 'user':
+        case 'name':
             return "buddy";
         default:
             return null;
