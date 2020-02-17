@@ -30,7 +30,13 @@ const WeatherSummary = () => {
     return weather === null ? "" : (
         <div className="weather-summary-wrapper">
             <span>Weather</span>
-            <WeatherCard data={weather.periods[0]} />
+            <div className="snap-wrapper">
+                <WeatherCard data={weather.periods[0]} />
+                <WeatherCard data={weather.periods[1]} />
+                <WeatherCard data={weather.periods[3]} />
+                <WeatherCard data={weather.periods[4]} />
+                <div></div>
+            </div>
         </div>
     );
 }
@@ -47,7 +53,7 @@ const WeatherCard = ({data}) => {
                 <h3 style={{color:  tempColor()}}>
                     {data.temperature}°{/*data.temperatureUnit*/}
                 </h3>
-                <span className="">{data.name}</span>
+                <span>{data.name}</span>
                 <br />
                 <p>{data.detailedForecast}</p>
             </div>

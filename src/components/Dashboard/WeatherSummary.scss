@@ -1,4 +1,21 @@
 .weather-summary-wrapper{
+    .snap-wrapper{
+        display: grid;
+        grid-template-columns: repeat(4, 70vw) 40px;
+        column-gap: 20px;
+        padding-left: 60px;
+        padding-right: 80px;
+        overflow-x: scroll;
+        scroll-snap-type: y mandatory;
+        overscroll-behavior: none;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        &::-webkit-scrollbar { /* WebKit */
+            width: 0;
+            height: 0;
+        }
+    }
+
     & span{
         font-size: 1.8rem;
         font-family: 'Alata';
@@ -7,9 +24,7 @@
         font-weight: bold;
     }
     & .card{
-        display: grid;
-        grid-template-columns: auto 1fr;
-        grid-template-rows: 1fr;
+        scroll-snap-align: center;
         background-color: var(--bg-secondary);
         box-shadow: var(--bg-secondary-border);
         border-radius: 10px;
