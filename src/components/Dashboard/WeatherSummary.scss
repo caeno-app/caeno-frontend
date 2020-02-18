@@ -1,7 +1,7 @@
 .weather-summary-wrapper{
     .snap-wrapper{
         display: grid;
-        grid-template-columns: repeat(4, 70vw) 40px;
+        grid-template-columns: repeat(4, 70%) 40px;
         column-gap: 20px;
         overflow-x: scroll;
         scroll-snap-type: y mandatory;
