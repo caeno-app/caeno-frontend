@@ -1,7 +1,18 @@
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import Swal from 'sweetalert2';
 import 'firebase/auth';
 import 'firebase/firestore';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDecumsV6RXObHwPRRkcyE-T5foKLqJqtE",
+    authDomain: "caeno-7144f.firebaseapp.com",
+    databaseURL: "https://caeno-7144f.firebaseio.com",
+    projectId: "caeno-7144f",
+    storageBucket: "caeno-7144f.appspot.com",
+    messagingSenderId: "710477581702",
+    appId: "1:710477581702:web:c6ad220d1e33d4d13db007"
+};
+firebase.initializeApp(firebaseConfig);
 
 let db;
 

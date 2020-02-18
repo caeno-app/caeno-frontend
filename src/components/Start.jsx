@@ -63,7 +63,7 @@ const App = () => {
 
 	return (
 		<LocationContext.Provider value={{...userLocation, promptLocation: promptLocation}}>
-			<Router initialEntries={pages} initialIndex={4}>
+			<Router initialEntries={pages} initialIndex={0}>
 				<Switch>
 					<Route exact path='/dash' component={Dashboard} />
 					<Route exact path='/restaurants' component={Restaurants} />
