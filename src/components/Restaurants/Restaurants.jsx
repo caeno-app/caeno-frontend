@@ -49,9 +49,11 @@ const Restaurants = () => {
                         : <Map center={[userLocation.lat, userLocation.lng]} data={restaurantsNearMe}/>}
                 </div>
                 <h3>Restaurants Near You</h3>
-                {restaurantsNearMe.map(restaurantData => {
-                    return <Restaurant key={restaurantData.id} {...restaurantData} />
-                })}
+                {restaurantsNearMe.reduce(( restaurantPinArray, restaurantData) => {
+                    // if(restaurantData.lat === "undefined" || restaurantData.lng === "undefined") return restaurantPinArray;
+                    restaurantPinArray.push(<Restaurant key={restaurantData.id} {...restaurantData} />);
+                    return restaurantPinArray;
+                }, [])}
             </main>
         </div>
     )

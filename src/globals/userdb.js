@@ -39,6 +39,16 @@ const init = () => {
  * @param {firebase user object} user
  */
 const setUserData = (user) => {
+    db.collection('users').doc('test').get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
     let userData = {
         name: user.displayName,
         email: user.email,
@@ -62,10 +72,10 @@ const checkIfLoggedIn = ( callback ) => {
 }
 
 const logout = (cb, err=defaultError) => {
-    firebase.auth().signOut().then(function() {
-        let theme = localStorage.getItem('theme');
+    firebase.auth().signOut().then(() => {
+        // let theme = localStorage.getItem('theme');
         localStorage.clear();
-        localStorage.setItem('theme', theme);
+        // localStorage.setItem('theme', theme);
         window.location.reload();
     }).catch(function(error) {
         err(error);
@@ -81,7 +91,9 @@ const getUser = (property=null) => {
 
     switch(property){
         case 'name':
-            return "buddy";
+            return "";
+        case 'email':
+            return "";
         default:
             return null;
     }
@@ -108,7 +120,6 @@ const currentUser = {
     weather: readWeather(),
     user: JSON.parse(localStorage.getItem('user')),
 }
-
 const defaultError = (error) => {
     Swal.fire({
         icon: 'error',
@@ -121,7 +132,6 @@ export default {
     init: init,
     login: {
         check: checkIfLoggedIn,
-        // google: promptLoginGoogle,
     },
     logout: logout,
     set:{

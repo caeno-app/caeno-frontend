@@ -4,10 +4,10 @@ import { Map as LMap, TileLayer, CircleMarker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Map.scss';
 
-const RestaurantPin = ({lat, lng, name, address}) => {
+const RestaurantPin = ({lat_lon, name, address}) => {
     return (
         <CircleMarker
-            center={[lat, lng]}
+            center={[lat_lon[0].lat, lat_lon[0].lon]}
             radius={5}
             fill={true}
             color={'#ffff00'}

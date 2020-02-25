@@ -51,11 +51,11 @@ const App = () => {
 	];
 	const [userLocation, setUserLocation] = useState(getDefaultLocation);
 	const promptLocation = async() => {
-		// getLocation().then(location => {
-		// 	setUserLocation(location);
-		// }).catch((err) => {
-		// 	console.error(err);
-		// });
+		getLocation().then(location => {
+			setUserLocation(location);
+		}).catch((err) => {
+			console.error(err);
+		});
 	}
 	useEffect(() => {
 		promptLocation();
