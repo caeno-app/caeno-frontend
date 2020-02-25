@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import Swal from 'sweetalert2';
 import 'firebase/auth';
 import 'firebase/firestore';
+import { current } from './Theme';
 
 const firebaseConfig = {
     apiKey: "AIzaSyDecumsV6RXObHwPRRkcyE-T5foKLqJqtE",
@@ -39,26 +40,38 @@ const init = () => {
  * @param {firebase user object} user
  */
 const setUserData = (user) => {
-    db.collection('users').doc('test').get().then(function(doc) {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
-    let userData = {
+    currentUser.user = {
         name: user.displayName,
         email: user.email,
         emailverified: user.emailVerified,
         anon: user.isAnonymous,
-        id: user.uid
+        id: user.uid,
+        preferences: null
     };
-    localStorage.setItem('user', JSON.stringify(userData));
-    currentUser.user = userData;
-    return userData;
+    db.collection('users').doc(currentUser.user.id).get().then(function(doc) {
+        if (doc.exists) {
+            currentUser.user.preferences = doc.data();
+        } else {
+            db.collection("users").doc(currentUser.user.id).set({
+                total: 0,
+                vector: Array(11).fill(0)
+            })
+            .then(function() {
+                console.log("Document successfully written!");
+                currentUser.user.preferences = {
+                    total: 0,
+                    vector: Array(11).fill(0)
+                };
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+    localStorage.setItem('user', JSON.stringify(currentUser.user));
+    return current.user;
 }
 /**
  * Checks if user is currently logged in, and set localstorage if true
