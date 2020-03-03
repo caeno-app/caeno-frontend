@@ -5,7 +5,7 @@ nav{
     max-width: 600px;
     height: 64px;
     display: grid;
-    z-index: 10000;
+    z-index: 1000;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 1fr;
     overflow: hidden;

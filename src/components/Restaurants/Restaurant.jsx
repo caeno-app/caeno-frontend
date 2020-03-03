@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
+import RestaurantMenu from './RestaurantMenu';
 import './Restaurants.scss';
-
-const RestaurantMenuItem = ({food_name, nf_calories, index}) => {  
-    return (
-        <div className="menu-item">
-            {food_name}
-            <br />
-            <span>{nf_calories} calories</span>
-        </div>
-    );
-}
 
 const Restaurant = ({name, brand_id, address}) => {
     const [restaurantData, setRestaurantData] = useState({});
@@ -35,15 +26,7 @@ const Restaurant = ({name, brand_id, address}) => {
             {name}
             <br />
             <span>{address}</span>
-            <div className={`menu-wrapper${expand ? ' expanded' : ''}`}>
-                <h3>Popular Items</h3>
-                {
-                    restaurantData.hasOwnProperty('popularTrackItems') 
-                    && restaurantData.popularTrackItems.map((menuItem, i) => (
-                        <RestaurantMenuItem key={menuItem['nix_item_id']} {...menuItem} index={i}/>
-                    ))
-                }
-            </div>
+            <RestaurantMenu open={expand} setOpen={setExpand} id={brand_id}/>
         </div>
     );
 }

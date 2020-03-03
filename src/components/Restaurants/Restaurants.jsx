@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { FoodDB } from '../../globals/Utils.js';
+import { FoodDB, UserDB } from '../../globals/Utils.js';
 import Restaurant from './Restaurant';
 import SearchBar from '../Searchbar/Searchbar';
 import Map from './Map';
@@ -21,13 +21,14 @@ const ErrorMap = ({promptLocation}) => {
 
 const Restaurants = () => {
     const userLocation = useContext(LocationContext);
+    const [center, setCenter] = useState([userLocation.lat, userLocation.lng]);
     const [restaurantsNearMe, setRestaurantsNearMe] = useState([]);
 
     useEffect( () => {
         if(userLocation.accuracy <= 0) return;
 
         (async () => {
-            let data = await FoodDB.get.location(userLocation.lat, userLocation.lng);
+            let data = await FoodDB.get.location(userLocation.lat, userLocation.lng, UserDB.get.user('preferences'));
             setRestaurantsNearMe(data);
         })();
 
@@ -46,7 +47,7 @@ const Restaurants = () => {
                 <div className="map">
                     {userLocation.accuracy <= 0 
                         ? <ErrorMap promptLocation={userLocation.promptLocation}/>
-                        : <Map center={[userLocation.lat, userLocation.lng]} data={restaurantsNearMe}/>}
+                        : <Map center={center} setCenter={setCenter} data={restaurantsNearMe}/>}
                 </div>
                 <h3>Restaurants Near You</h3>
                 {restaurantsNearMe.reduce(( restaurantPinArray, restaurantData) => {

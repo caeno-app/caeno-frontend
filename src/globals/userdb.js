@@ -24,13 +24,7 @@ let db;
 const init = () => {
     db = firebase.firestore(); 
     db.enablePersistence().catch( err => {
-        if (err.code === 'failed-precondition') {
-            // Multiple tabs open, persistence can only be enabled
-            // in one tab at a a time.
-        } else if (err.code === 'unimplemented') {
-            // The current browser does not support all of the
-            // features required to enable persistence
-        }
+        console.error(err.code);
     });
 }
 
@@ -57,7 +51,7 @@ const setUserData = (user) => {
                 vector: Array(11).fill(0)
             })
             .then(function() {
-                console.log("Document successfully written!");
+                console.log("Initialized user vector.");
                 currentUser.user.preferences = {
                     total: 0,
                     vector: Array(11).fill(0)
@@ -86,9 +80,9 @@ const checkIfLoggedIn = ( callback ) => {
 
 const logout = (cb, err=defaultError) => {
     firebase.auth().signOut().then(() => {
-        // let theme = localStorage.getItem('theme');
+        let theme = localStorage.getItem('theme');
         localStorage.clear();
-        // localStorage.setItem('theme', theme);
+        localStorage.setItem('theme', theme);
         window.location.reload();
     }).catch(function(error) {
         err(error);
@@ -107,6 +101,8 @@ const getUser = (property=null) => {
             return "";
         case 'email':
             return "";
+        case 'preferences':
+            return Array(11).fill(0);
         default:
             return null;
     }
