@@ -21,21 +21,44 @@
         background-color: var(--bg-primary);
         border-radius: 20px;
         text-align: center;
-        & .menu-item{
-            border-top: 1px solid grey;
-            padding-top: 15px;
-            margin: 20px;
-            font-size: 1rem;
-        }
-        & .quantity{
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            column-gap: 20px;
-            margin-top: 15px;
-            & p{
-                padding: 8px;
-                margin: 0;
+        & .items{
+            height: calc(100% - 100px);
+            overflow-y: scroll;
+            & .menu-item{
+                border-top: 1px solid grey;
+                padding-top: 15px;
+                margin: 20px;
+                font-size: 1rem;
             }
+            & .quantity{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                height: 0px;
+                overflow: hidden;
+                column-gap: 20px;
+                margin-top: 0px;
+                transition: height 350ms, margin-top 350ms;
+                & p{
+                    padding: 8px;
+                    margin: 0;
+                }
+                & button{
+                    border-radius: 4px;
+                    color: var(--text-color-primary);
+                    background-color: var(--bg-secondary);
+                    padding: 8px;
+                    border: none;
+                }
+            }
+            & .quantity.open{
+                margin-top: 10px;
+                height: 35px;
+            }
+        }
+        & .user-options{
+            box-sizing: border-box;
+            padding-top: 40px;
+            height: 100px;
             & button{
                 border-radius: 4px;
                 color: var(--text-color-primary);

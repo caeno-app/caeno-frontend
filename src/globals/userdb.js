@@ -42,30 +42,52 @@ const setUserData = (user) => {
         id: user.uid,
         preferences: null
     };
-    db.collection('users').doc(currentUser.user.id).get().then(function(doc) {
+    db.collection('users').doc(currentUser.user.id).get().then(doc =>{
         if (doc.exists) {
             currentUser.user.preferences = doc.data();
         } else {
             db.collection("users").doc(currentUser.user.id).set({
                 total: 0,
-                vector: Array(11).fill(0)
+                vector: Array(11).fill(0),
+                history: []
             })
-            .then(function() {
-                console.log("Initialized user vector.");
+            .then(() => {
                 currentUser.user.preferences = {
                     total: 0,
-                    vector: Array(11).fill(0)
+                    vector: Array(11).fill(0),
+                    history: []
                 };
             })
-            .catch(function(error) {
-                console.error("Error writing document: ", error);
+            .catch(err => {
+                console.error("Error writing document: ", err);
             });
         }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
+    }).catch(err => {
+        console.log("Error getting document:", err);
     });
     localStorage.setItem('user', JSON.stringify(currentUser.user));
     return current.user;
+}
+
+const setUserVector = (vector, total, history, cb) => {
+    db.collection('users').doc(currentUser.user.id).set({
+        vector: vector,
+        total: total,
+        history: history
+    }).then(() => {
+        currentUser.user.preferences = {
+            vector: vector,
+            total: total,
+            history: history
+        };
+        cb();
+    }).catch(err => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err,
+        })
+    });
 }
 /**
  * Checks if user is currently logged in, and set localstorage if true
@@ -77,6 +99,7 @@ const checkIfLoggedIn = ( callback ) => {
         callback(user);
     });
 }
+
 
 const logout = (cb, err=defaultError) => {
     firebase.auth().signOut().then(() => {
@@ -144,7 +167,8 @@ export default {
     },
     logout: logout,
     set:{
-        weather: setWeather
+        weather: setWeather,
+        user: setUserVector
     },
     get: {
         user: getUser,

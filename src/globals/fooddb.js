@@ -25,25 +25,9 @@ const restaurantsNearLocation = async (lat, lng, vector) => {
 }
 const menuItemAtLocation = async (id) => {
     try {
-        // let res = await fetch(`${endpoint}/api/elrestaurants?dist=1&lat=${lat}&lng=${lng}&vector=${JSON.stringify(vector.vector)}`);
-        // res = await res.json();
-        return [
-            {
-                "_id": "513fc9ce673c4fbc260074bf",
-                "item_name": "#1 Side - Brown Rice - Black Beans",
-                "calories": 430,
-            },
-            {
-                "_id": "513fc9ce673c4fbc260074c0",
-                "item_name": "#1 Side - Brown Rice - White Beans",
-                "calories": 350,
-            },
-            {
-                "_id": "513fc9ce673c4fbc260074c1",
-                "item_name": "#1 Side - White Rice - Black Beans",
-                "calories": 450,
-            }
-        ];
+        let res = await fetch(`${endpoint}/api/elmenulist?brandid=${id}`);
+        res = await res.json();
+        return res;
     } catch (err) {
         console.error(err);
         return [];
