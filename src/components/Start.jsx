@@ -11,7 +11,7 @@ import Dashboard from './Dashboard/Dashboard';
 import Profile from './Profile/Profile';
 import Restaurants from './Restaurants/Restaurants';
 import Nutrition from './Nutrition/Nutrition';
-import Add from './Add/Add';
+import History from './History/History';
 import Login from './Login/Login';
 import { UserDB } from '../globals/Utils';
 import LocationContext, {getLocation, getDefaultLocation} from '../context/LocationContext';
@@ -45,8 +45,8 @@ const App = () => {
 	const pages = [
 		'/dash',
 		'/restaurants',
-		'/add',
 		'/nutrition',
+		'/history',
 		'/profile',
 	];
 	const [userLocation, setUserLocation] = useState(getDefaultLocation);
@@ -67,8 +67,8 @@ const App = () => {
 				<Switch>
 					<Route exact path='/dash' component={Dashboard} />
 					<Route exact path='/restaurants' component={Restaurants} />
-					<Route exact path='/add' component={Add} />
 					<Route exact path='/nutrition' component={Nutrition} />
+					<Route exact path='/history' component={History} />
 					<Route exact path='/profile' component={Profile} />
 				</Switch>
 				<BottomNavigation pages={pages}/>

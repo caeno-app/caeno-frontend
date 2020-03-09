@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import {ReactComponent as DashIcon} from '../../assets/dash.svg';
 import {ReactComponent as ProfileIcon} from '../../assets/profile.svg';
-import {ReactComponent as AddIcon} from '../../assets/add.svg';
+import {ReactComponent as ChartIcon} from '../../assets/chart.svg';
 import {ReactComponent as NutritionIcon} from '../../assets/nutrition.svg';
 import {ReactComponent as RestaurantIcon} from '../../assets/restaurant.svg';
 import './BottomNavigation.scss';
@@ -10,8 +10,8 @@ import './BottomNavigation.scss';
 const icons = {
     '/dash': <DashIcon />,
     '/restaurants': <RestaurantIcon/>,
-    '/add': <AddIcon/>,
     '/nutrition': <NutritionIcon/>,
+    '/history': <ChartIcon/>,
     '/profile': <ProfileIcon/>,
 }
 
