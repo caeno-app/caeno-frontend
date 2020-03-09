@@ -16,4 +16,10 @@
             border: 1px solid #cfffaacc;
         }
     }
+    & .results{
+        position: relative;
+        max-height: 300px;
+        width: 100%;
+        overflow-y: scroll;
+    }
 }

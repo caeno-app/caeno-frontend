@@ -25,3 +25,19 @@
     }
 
 }
+.nutrition-result-wrapper{
+    padding: 20px;
+    &:hover{
+        background-color: var(--bg-secondary);
+    }
+    p{
+        margin: 0;
+        &.item-name{
+            font-size: 1.2rem;
+        }
+        & span{
+            font-size: inherit;
+            color: rgb(0, 255, 0);
+        }
+    }
+}

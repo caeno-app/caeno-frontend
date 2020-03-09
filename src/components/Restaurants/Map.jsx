@@ -39,7 +39,7 @@ const Map = ({data, center, setCenter}) => {
                 fillOpacity={'1'}
             >
             </CircleMarker>
-            {data.map(e => <RestaurantPin key={e.id} {...e} setCenter={setCenter}/> )}
+            {data.map(e => <RestaurantPin key={e._id} {...e} setCenter={setCenter}/> )}
         </LMap>
     )
 }

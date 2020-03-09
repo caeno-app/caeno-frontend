@@ -50,9 +50,9 @@ const Restaurants = () => {
                         : <Map center={center} setCenter={setCenter} data={restaurantsNearMe}/>}
                 </div>
                 <h3>Restaurants Near You</h3>
-                {restaurantsNearMe.reduce(( restaurantPinArray, restaurantData) => {
+                {restaurantsNearMe.reduce((restaurantPinArray, restaurantData) => {
                     // if(restaurantData.lat === "undefined" || restaurantData.lng === "undefined") return restaurantPinArray;
-                    restaurantPinArray.push(<Restaurant key={restaurantData.id} {...restaurantData} />);
+                    restaurantPinArray.push(<Restaurant key={restaurantData._id} {...restaurantData} />);
                     return restaurantPinArray;
                 }, [])}
             </main>

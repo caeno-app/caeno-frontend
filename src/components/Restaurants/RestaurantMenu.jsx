@@ -90,16 +90,13 @@ const RestaurantMenu = ({open, setOpen, id, vector}) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, add it!'
-        }).then((res) => {
+        }).then(res => {
             if (res.value) {
                 let total = 0;
-                for(const item in meal){
-                    total+=1;
-                }
+                for(const item in meal){ total += Number(meal[item]) }
                 let newUserVector = UserDB.get.user('preferences').vector,
                     newUserTotal = UserDB.get.user('preferences').total,
                     newUserHistory = UserDB.get.user('preferences').history;
-                console.log("init: ", newUserVector, vector, newUserTotal);
                 for(let i = 0; i < total; i++){
                     newUserTotal += 1;
                     newUserVector = updateUserVector(newUserVector, newUserTotal, vector);

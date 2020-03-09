@@ -23,7 +23,7 @@ const Dashboard = () => {
                     <br />
                     {`Good ${today.getHours() < 12 ? 'Morning' : 'Afternoon'}!`}
                 </h2>
-                <SearchBar />
+                {/* <SearchBar /> */}
             </div>
             <div className="cards-wrapper">
                 <WeatherSummary />

@@ -3,7 +3,7 @@ import RestaurantMenu from './RestaurantMenu';
 import './Restaurants.scss';
 
 const Restaurant = ({name, brand_id, address, densevector}) => {
-    const [restaurantData, setRestaurantData] = useState({});
+    // const [restaurantData, setRestaurantData] = useState({});
     const [retrievedRestaurantData, setRetrievedRestaurantData] = useState(false);
     const [expand, setExpand] = useState(false);
 
@@ -14,12 +14,12 @@ const Restaurant = ({name, brand_id, address, densevector}) => {
 
         setRetrievedRestaurantData(true);
     
-        fetch(`https://www.nutritionix.com/nixapi/brands/${brand_id}`)
-        .then(resp => {
-            return resp.json();
-        }).then(resp => {
-            setRestaurantData(resp);
-        });
+        // fetch(`https://www.nutritionix.com/nixapi/brands/${brand_id}`)
+        // .then(resp => {
+        //     return resp.json();
+        // }).then(resp => {
+        //     setRestaurantData(resp);
+        // });
     }
     return (
         <div className="restaurant-wrapper" onClick={getAndDisplayRestaurantData}>

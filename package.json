@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^7.9.1",
     "firebaseui": "^4.4.0",
+    "fuse.js": "^3.6.1",
     "gh-pages": "^2.2.0",
     "leaflet": "^1.6.0",
     "node-sass": "^4.13.1",

@@ -2,8 +2,7 @@
 /**
  * @TODO setup https for server
  */
-// const endpoint = `http://api.caeno.app`;
-const endpoint = `http://172.112.215.241`;
+const endpoint = `https://api.caeno.app`;
 
 /**
  * @documentation - https://github.com/caeno-app/caeno-backend
@@ -33,9 +32,21 @@ const menuItemAtLocation = async (id) => {
         return [];
     }
 }
+const itemsNearLocation = async (lat, lng) => {
+    try {
+        let res = await fetch(`${endpoint}/api/elmenu?dist=10&lat=${lat}&lng=${lng}`);
+        res = await res.json();
+        return res;
+    } catch (err) {
+        console.error(err);
+        return [];
+    }
+}
+
 export default {
     get: {
         location: restaurantsNearLocation,
-        menu: menuItemAtLocation
+        menu: menuItemAtLocation,
+        items: itemsNearLocation,
     }
 }
