@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {UserDB} from '../../globals/Utils';
+import {ReactComponent as ExpandMoreIcon} from '../../assets/expandmore.svg';
+import {ReactComponent as ExpandLessIcon} from '../../assets/expandless.svg';
 import './History.scss';
 
 const HistoryItem = ({time, ...items}) => {
     const [open, setOpen] = useState(false);
-    const [datat, setDatat] = useState("[]");
+    const [data, setData] = useState("[]");
 
     useEffect(() => {
         let finalData = [];
@@ -12,26 +14,30 @@ const HistoryItem = ({time, ...items}) => {
             finalData.push({id: item, quantity: items[item]});
             if(localStorage.getItem(item) === null){
                 localStorage.setItem(item, JSON.stringify({
-                    cal: null,
-                    calFromFat: null,
-                    totalFat: null,
-                    transFat: null,
+                    brand: "",
+                    name: "",
+                    "calories": null,
+                    "calories from fat": null,
+                    "total fat": null,
+                    "trans fat": null,
                     cholesterol: null,
                     sodium: null,
-                    totalCarb: null,
+                    "total carbs": null,
                     fiber: null,
                     sugars: null,
                     protein: null
                 }));
                 fetch('https://www.nutritionix.com/nixapi/items/' + item).then(res => res.json()).then(res => {
                     localStorage.setItem(item, JSON.stringify({
-                        cal: res.calories,
-                        calFromFat: res.calories_from_fat,
-                        totalFat: res.total_fat,
-                        transFat: res.trans_fat,
+                        brand: res.brand_name,
+                        name: res.item_name,
+                        "calories": res.calories,
+                        "calories from fat": res.calories_from_fat,
+                        "total fat": res.total_fat,
+                        "trans fat": res.trans_fat,
                         cholesterol: res.cholesterol,
                         sodium: res.sodium,
-                        totalCarb: res.totalCarb,
+                        "total carbs": res.totalCarb,
                         fiber: res.dietary_fiber,
                         sugars: res.sugars,
                         protein: res.protein
@@ -41,14 +47,41 @@ const HistoryItem = ({time, ...items}) => {
                 })
             }
         }
-        setDatat(JSON.stringify(finalData));
+        setData(JSON.stringify(finalData));
     }, [items]);
 
     return (
         <div className="history-item" onClick={() => {setOpen(!open)}}>
-            {JSON.parse(datat).length} item{JSON.parse(datat).length > 1 ? 's' : ''} @ {(new Date(time)).toDateString()}
+            <div className="expand-icon">
+                {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </div>
+            <p>{JSON.parse(data).length} item{JSON.parse(data).length > 1 ? 's' : ''}</p> @ <span>{(new Date(time)).toDateString()}</span>
+
             <div className={`details ${open ? "open" : ""}`}>
-                
+                {JSON.parse(data).map(e => <FoodItem id={e.id} amt={e.quantity}/>)}
+            </div>
+        </div>
+    );
+}
+const FoodItem = ({id, amt}) => {
+    const [{name, brand, ...stats}] = useState(JSON.parse(localStorage.getItem(id)));
+
+    return (
+        <div className="history-food">
+            <h4>{name} x{amt}</h4>
+            <div>
+                {Object.keys(stats).reduce((acc, val) => {
+                    if(stats[val] !== null){
+                        return ([ ...acc, (
+                            <div className="fact" key={val}>
+                                <div className="category">{val}</div>
+                                <div className="value">{stats[val]}</div>
+                            </div>
+                            )]
+                        );
+                    }
+                    return acc;
+                }, [])}
             </div>
         </div>
     );

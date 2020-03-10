@@ -16,7 +16,7 @@ const Theme = ( dark ) => {
     saveToStorage(dark);    
     switch(dark){
         case 0:
-            setp('--accent', '#ccffaa');
+            setp('--accent', '#88dd66');
             setp('--text-color-primary', '#000000');
             setp('--text-color-secondary', '#333333');
             setp('--text-color-disabled', '#888888');
@@ -26,7 +26,7 @@ const Theme = ( dark ) => {
             break;
         case 1:
         default:
-            setp('--accent', '#77ff33aa');
+            setp('--accent', '#77ff33');
             setp('--text-color-primary', '#ffffff');
             setp('--text-color-secondary', '#cdcdcd'); 
             setp('--text-color-disabled', '#888888');
