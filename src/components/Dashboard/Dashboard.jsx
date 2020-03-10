@@ -4,6 +4,7 @@ import './Dashboard.scss';
 import WeatherSummary from './WeatherSummary';
 import FoodItemHexbin from '../../globals/graphs/FoodItemHexbin';
 import FoodLineChart from '../../globals/graphs/FoodLineChart';
+import FoodContourGraph from '../../globals/graphs/FoodContourGraph';
 import 'react-vis/dist/style.css';
 
 const Dashboard = () => {
@@ -51,6 +52,7 @@ const Dashboard = () => {
                 <WeatherSummary />
                 <FoodItemHexbin DATA={hexbinData}/>
                 <FoodLineChart DATA={hexbinData}/>
+                <FoodContourGraph DATA={hexbinData}/>
             </div>
         </div>
     )

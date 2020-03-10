@@ -75,7 +75,7 @@ const FoodItemHexbin = ({DATA}) => {
 				<button onClick={updateY.bind(null, true)}>❯</button>
 			</div>
 			<article className="description">
-				This graph displays the ratio of {DIMENSIONS[xAxis]} to {DIMENSIONS[yAxis]} per food item. 
+				This graph displays the ratio of {DIMENSIONS[xAxis]} to {DIMENSIONS[yAxis]} per meal. 
 			</article>
 		</div>
 	);

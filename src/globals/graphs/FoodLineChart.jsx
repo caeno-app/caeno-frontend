@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {
     XYPlot,
-    XAxis,
     YAxis,
     VerticalBarSeriesCanvas
 } from 'react-vis';
@@ -35,7 +34,6 @@ const FoodLineChart = ({DATA}) => {
                     x: (new Date(e.time)).getTime(),
                     y: (e[DIMENSIONS[yAxis]] ?? 0)
                 }))} />
-                <XAxis />
                 <YAxis />
             </XYPlot>
 			<article className="description">
