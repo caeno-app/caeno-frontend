@@ -43,7 +43,7 @@ const MenuItem = ({item_name, calories, _id, meal, setMeal, ItemDict, setItemDic
             <br />
             <span>{calories} calories</span>
             <div className={`quantity ${open ? 'open' : ''}`}>
-                <p>Qty. {quantity}</p>
+                <p>{quantity}x</p>
                 <button onClick={add}>add</button>
                 <button onClick={remove}>remove</button>
             </div>

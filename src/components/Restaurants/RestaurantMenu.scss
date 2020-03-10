@@ -7,6 +7,7 @@
     z-index: 1030;
     top: 0;
     left: 0;
+    overflow: hidden;
     height: 100vh;
     width: 100vw;
     padding: 20px;
@@ -14,21 +15,40 @@
     & h1{
         padding-top: 30px;
         margin: 0;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
     & .menu{
         height: 100%;
+        max-height: 600px;
+        transform: translateY(calc(50vh - 50% - 20px));
         width: 100%;
+        overflow: hidden;
         background-color: var(--bg-primary);
         border-radius: 20px;
         text-align: center;
+        & .close{
+            position: absolute;
+            right: 0;
+            width: 50px;
+            border-bottom-left-radius: 20px;
+            background-color: rgb(228, 62, 62);
+        }
+        & h1{
+            font-size: 2rem;
+            padding: 30px 30px 10px 30px;
+        }
         & .items{
-            height: calc(100% - 100px);
+            height: calc(100% - 170px);
+            padding: 0 20px 0 20px;
             overflow-y: scroll;
             & .menu-item{
                 border-top: 1px solid grey;
                 padding-top: 15px;
-                margin: 20px;
+                margin: 10px;
                 font-size: 1rem;
+
                 & .grouped{
                     display: none;
                     font-weight: normal;
@@ -70,16 +90,20 @@
         }
         & .user-options{
             box-sizing: border-box;
-            padding-top: 40px;
+            padding: 30px 0 0 0;
             height: 100px;
             & button{
                 border-radius: 4px;
+                font-size: 1rem;
                 color: var(--text-color-primary);
-                background-color: var(--bg-secondary);
+                background-color: #00cf0a;
                 padding: 8px 20px;
+                float: right;
+                margin-right: 40px;
                 border: none;
+                transition: background-color 350ms;
                 &:disabled{
-                    color: grey;
+                    color: var(--text-color-primary);
                     background-color: rgb(105, 105, 105);
                 }
             }

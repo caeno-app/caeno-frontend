@@ -29,7 +29,7 @@ const DisplayMeal = ({meal, ItemDict}) => {
     );
 }
 
-const RestaurantMenu = ({open, setOpen, id, vector}) => {
+const RestaurantMenu = ({open, name, setOpen, id, vector}) => {
     const [menu, setMenu] = useState(null);
     const [meal, setMeal] = useState(null);
     const [itemDict, setItemDict] = useState({});
@@ -94,9 +94,10 @@ const RestaurantMenu = ({open, setOpen, id, vector}) => {
 
     return (
         <div className={`menus-wrapper ${open ? 'open' : ''}`} onClick={() => {setOpen(false)}}>
-            <div className="menu">
+            <div className="menu" onClick={(e) => {e.stopPropagation()}}>
+                <div className="close" onClick={(e) => {e.stopPropagation(); setOpen(!open)}}>x</div>
+                <h1>{name}</h1>
                 <div className="items">
-                <h1>Menu</h1>
                 {menu !== null && (
                     menu.map((menuItem, i) => {
                         if(!menuItem.hasOwnProperty('group_id')){
@@ -107,7 +108,7 @@ const RestaurantMenu = ({open, setOpen, id, vector}) => {
                 )}
                 </div>
                 <div className="user-options">
-                    <button disabled={meal === null || Object.keys(meal).length === 0} onClick={updateUserMeals}>add meal</button>
+                    <button disabled={meal === null || Object.keys(meal).length === 0} onClick={updateUserMeals}>Add Meal</button>
                 </div>
             </div>
         </div>  

@@ -13,7 +13,7 @@ const Restaurant = ({name, brand_id, address, densevector}) => {
             {name}
             <br />
             <span>{address}</span>
-            <RestaurantMenu open={expand} setOpen={setExpand} id={brand_id} vector={densevector}/>
+            <RestaurantMenu name={name} open={expand} setOpen={setExpand} id={brand_id} vector={densevector}/>
         </div>
     );
 }

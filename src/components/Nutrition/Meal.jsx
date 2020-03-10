@@ -12,7 +12,7 @@ const Meal = ({brand_id, calories, item_name, restaurant}) => {
             {item_name}
             <br />
             <span>{calories} Cal. {restaurant}</span>
-            <RestaurantMenu open={expand} setOpen={setExpand} id={brand_id} vector={null}/>
+            <RestaurantMenu name={restaurant} open={expand} setOpen={setExpand} id={brand_id} vector={null}/>
         </div>
     );
 }
