@@ -10,7 +10,7 @@ const DisplayMeal = ({meal, ItemDict}) => {
         let meals = [];
         for(const item in meal){
             meals.push(
-                <div className="">
+                <div key={item} className="">
                     <div className="">
                         {ItemDict[item]}
                     </div>

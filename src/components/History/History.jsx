@@ -58,14 +58,16 @@ const HistoryItem = ({time, ...items}) => {
             <p>{JSON.parse(data).length} item{JSON.parse(data).length > 1 ? 's' : ''}</p> @ <span>{(new Date(time)).toDateString()}</span>
 
             <div className={`details ${open ? "open" : ""}`}>
-                {JSON.parse(data).map(e => <FoodItem id={e.id} amt={e.quantity}/>)}
+                {JSON.parse(data).map(e => <FoodItem key={e.id} open={open} id={e.id} amt={e.quantity}/>)}
             </div>
         </div>
     );
 }
-const FoodItem = ({id, amt}) => {
-    const [{name, brand, ...stats}] = useState(JSON.parse(localStorage.getItem(id)));
-
+const FoodItem = ({id, amt, open}) => {
+    const [{name, brand, ...stats}, setData] = useState(JSON.parse(localStorage.getItem(id)));
+    useEffect(() => {
+        setData(JSON.parse(localStorage.getItem(id)));
+    }, [open, id]);
     return (
         <div className="history-food">
             <h4>{name} x{amt}</h4>

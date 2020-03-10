@@ -1,16 +1,36 @@
-import React, {useState} from 'react';
-import SearchBar from '../Searchbar/Searchbar';
+import React, {useState, useEffect} from 'react';
 import {UserDB} from '../../globals/Utils';
 import './Dashboard.scss';
 import WeatherSummary from './WeatherSummary';
-
+import FoodItemHexbin from '../../globals/graphs/FoodItemHexbin';
+import 'react-vis/dist/style.css';
 
 const Dashboard = () => {
     const [today] = useState(new Date());
+    const convertHex = (data) => {
+        if(data.history === undefined) return [];
+        let parsed = [];
+        data.history.forEach(entry => {
+            let {time, ...meals} = entry;
+            Object.keys(meals).forEach(meal => {
+                parsed.push(
+                    JSON.parse(localStorage.getItem(meal))
+                )
+            })
+        })
+        return parsed;
+    }
+    const [hexbinData, setHexbinData] = useState(convertHex(UserDB.get.user('preferences')));
     const getFirstName = () => {
         let fname = UserDB.get.user('name').split(' ')[0]
         return fname.charAt(0).toUpperCase() + fname.slice(1);
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setHexbinData(convertHex(UserDB.get.user('preferences')))
+        }, 1000);
+    }, []);
 
     return (
         <div className="dashboard-wrapper">
@@ -23,10 +43,10 @@ const Dashboard = () => {
                     <br />
                     {`Good ${today.getHours() < 12 ? 'Morning' : 'Afternoon'}!`}
                 </h2>
-                {/* <SearchBar /> */}
             </div>
             <div className="cards-wrapper">
                 <WeatherSummary />
+                <FoodItemHexbin DATA={hexbinData}/>
             </div>
         </div>
     )

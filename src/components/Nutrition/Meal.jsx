@@ -4,7 +4,6 @@ import '../Restaurants/Restaurants.scss';
 
 const Meal = ({brand_id, calories, item_name, restaurant}) => {
     const [expand, setExpand] = useState(false);
-    // get desnse vector TODO
     const getAndDisplayRestaurantData = () => {
         setExpand(true);
     }

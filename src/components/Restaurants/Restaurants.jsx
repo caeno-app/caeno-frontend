@@ -27,6 +27,7 @@ const Result = ({item, matches}) => {
     const [expand, setExpand] = useState(false);
     const [name, setName] = useState(item.name);
     const [address, setAddress] = useState(item.address);
+
     useEffect(() => {
         matches.forEach((e) => {
             let finalName;
@@ -54,7 +55,6 @@ const Result = ({item, matches}) => {
         </div>
     );
 }
-
 
 const Restaurants = () => {
     const userLocation = useContext(LocationContext);

@@ -3,7 +3,6 @@ import RestaurantMenu from './RestaurantMenu';
 import './Restaurants.scss';
 
 const Restaurant = ({name, brand_id, address, densevector}) => {
-    const [retrievedRestaurantData, setRetrievedRestaurantData] = useState(false);
     const [expand, setExpand] = useState(false);
 
     const getAndDisplayRestaurantData = () => {

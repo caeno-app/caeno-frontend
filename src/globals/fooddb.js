@@ -1,7 +1,3 @@
-
-/**
- * @TODO setup https for server
- */
 const endpoint = `https://api.caeno.app`;
 
 /**
@@ -14,7 +10,7 @@ const endpoint = `https://api.caeno.app`;
  */
 const restaurantsNearLocation = async (lat, lng, vector) => {
     try {
-        let res = await fetch(`${endpoint}/api/elrestaurants?dist=1&lat=${lat}&lng=${lng}&vector=${JSON.stringify(vector.vector)}`);
+        let res = await fetch(`${endpoint}/api/elrestaurants?dist=2&lat=${lat}&lng=${lng}&vector=${JSON.stringify(vector.vector)}`);
         res = await res.json();
         return res;
     } catch (err) {
@@ -34,7 +30,7 @@ const menuItemAtLocation = async (id) => {
 }
 const itemsNearLocation = async (lat, lng) => {
     try {
-        let res = await fetch(`${endpoint}/api/elmenu?dist=10&lat=${lat}&lng=${lng}`);
+        let res = await fetch(`${endpoint}/api/elmenu?dist=2&lat=${lat}&lng=${lng}`);
         res = await res.json();
         return res;
     } catch (err) {
