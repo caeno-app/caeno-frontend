@@ -29,6 +29,19 @@
                 padding-top: 15px;
                 margin: 20px;
                 font-size: 1rem;
+                & .grouped{
+                    display: none;
+                    font-weight: normal;
+                    &.open{
+                        display: block;
+                    }
+                    & .menu-item{
+                        margin: 10px;
+                    }
+                }
+                &.grouped{
+                    font-weight: bold;
+                }
             }
             & .quantity{
                 display: grid;
@@ -63,9 +76,14 @@
                 border-radius: 4px;
                 color: var(--text-color-primary);
                 background-color: var(--bg-secondary);
-                padding: 8px;
+                padding: 8px 20px;
                 border: none;
+                &:disabled{
+                    color: grey;
+                    background-color: rgb(105, 105, 105);
+                }
             }
+
         }
     }
 }

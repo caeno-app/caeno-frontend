@@ -3,7 +3,6 @@ import RestaurantMenu from '../Restaurants/RestaurantMenu';
 import '../Restaurants/Restaurants.scss';
 
 const Meal = ({brand_id, calories, item_name, restaurant}) => {
-    const densevector = (new Array(11)).fill(0);
     const [expand, setExpand] = useState(false);
     // get desnse vector TODO
     const getAndDisplayRestaurantData = () => {
@@ -14,7 +13,7 @@ const Meal = ({brand_id, calories, item_name, restaurant}) => {
             {item_name}
             <br />
             <span>{calories} Cal. {restaurant}</span>
-            <RestaurantMenu open={expand} setOpen={setExpand} id={brand_id} vector={densevector}/>
+            <RestaurantMenu open={expand} setOpen={setExpand} id={brand_id} vector={null}/>
         </div>
     );
 }

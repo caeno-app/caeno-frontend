@@ -7,7 +7,6 @@ import Meal from './Meal';
 import './Nutrition.scss';
 
 const Result = ({item, matches}) => {
-    let densevector =(new Array(11)).fill(0);
     const restaurantPopup = (e) => {
         e.preventDefault();
         setExpand(true);
@@ -39,7 +38,7 @@ const Result = ({item, matches}) => {
         <div className="nutrition-result-wrapper" onClick={restaurantPopup}>
             <p className="item-name" dangerouslySetInnerHTML={{__html: name}}></p>
             {item.calories} Cal. <p dangerouslySetInnerHTML={{__html: restaurant}}></p>
-            <RestaurantMenu open={expand} setOpen={setExpand} id={item.brand_id} vector={densevector}/>
+            <RestaurantMenu open={expand} setOpen={setExpand} id={item.brand_id} vector={null}/>
         </div>
     );
 }

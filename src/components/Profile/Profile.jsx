@@ -22,7 +22,7 @@ const Profile = ({history}) => {
                     Dark Theme: 
                     <label>
                         <Toggle
-                            defaultChecked={current()}
+                            defaultChecked={current() === 0}
                             icons={false}
                             onChange={toggleTheme} />
                     </label>
