@@ -3,6 +3,7 @@ import {UserDB} from '../../globals/Utils';
 import './Dashboard.scss';
 import WeatherSummary from './WeatherSummary';
 import FoodItemHexbin from '../../globals/graphs/FoodItemHexbin';
+import FoodLineChart from '../../globals/graphs/FoodLineChart';
 import 'react-vis/dist/style.css';
 
 const Dashboard = () => {
@@ -13,9 +14,11 @@ const Dashboard = () => {
         data.history.forEach(entry => {
             let {time, ...meals} = entry;
             Object.keys(meals).forEach(meal => {
-                parsed.push(
-                    JSON.parse(localStorage.getItem(meal))
-                )
+                parsed.push({
+                    ...JSON.parse(localStorage.getItem(meal)),
+                    time: time,
+                    id: meal,
+                });
             })
         })
         return parsed;
@@ -47,6 +50,7 @@ const Dashboard = () => {
             <div className="cards-wrapper">
                 <WeatherSummary />
                 <FoodItemHexbin DATA={hexbinData}/>
+                <FoodLineChart DATA={hexbinData}/>
             </div>
         </div>
     )

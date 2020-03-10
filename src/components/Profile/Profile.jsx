@@ -6,7 +6,7 @@ import Toggle from 'react-toggle';
 import './Profile.scss';
 
 
-const Profile = ({history}) => {
+const Profile = () => {
     const toggleTheme = () => { Theme(current() === 0 ? 1 : 0) }
     const logout = () => { UserDB.logout() }
     return (
@@ -22,7 +22,7 @@ const Profile = ({history}) => {
                     Dark Theme: 
                     <label>
                         <Toggle
-                            defaultChecked={current() === 0}
+                            defaultChecked={current() !== 0}
                             icons={false}
                             onChange={toggleTheme} />
                     </label>
