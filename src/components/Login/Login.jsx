@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {ReactComponent as Avocado} from '../../assets/logo.svg';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 import './Login.scss';

@@ -5,7 +5,6 @@ import {
   YAxis,
   ContourSeries,
   MarkSeriesCanvas,
-  Borders
 } from 'react-vis';
 
 const FoodContourGraph = ({DATA}) => {

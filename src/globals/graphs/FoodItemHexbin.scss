@@ -11,13 +11,12 @@
         grid-template-columns: repeat(3, 1fr);
         font-size: 1.2rem;
         & div{
-            padding-top: 8px;
+            padding-top: 0px;
         }
-        
         & button{
-            border: 1px solid white;
+            border: 1px solid var(--text-primary-color);
             background-color: transparent;
-            color: white;
+            color: var(--text-primary-color);
             border-radius: 4px;
             font-size: 1rem;
             padding-bottom: 3px;
