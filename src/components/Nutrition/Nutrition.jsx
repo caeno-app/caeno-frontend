@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import SearchBar from '../Searchbar/Searchbar';
 import LocationContext from '../../context/LocationContext';
-import {FoodDB} from '../../globals/Utils';
+import {FoodDB, UserDB} from '../../globals/Utils';
 import RestaurantMenu from '../Restaurants/RestaurantMenu';
 import Meal from './Meal';
 import './Nutrition.scss';
@@ -52,10 +52,11 @@ const Nutrition = () => {
         if(userLocation.accuracy <= 0) return;
 
         (async () => {
-            let data = await FoodDB.get.items(userLocation.lat, userLocation.lng);
+            let vector = UserDB.get.user('preferences').vector ?? Array(11).fill(0);
+            let data = await FoodDB.get.items(userLocation.lat, userLocation.lng, JSON.stringify(vector));
             data = data.map(item => ({
-                "id": item[0],
-                ...item[1]
+                "id": item._id,
+                ...item
             }));
             setItems(data);
         })();
@@ -71,12 +72,12 @@ const Nutrition = () => {
                 <SearchBar
                     placeholder="Search food items..."
                     data={items}
-                    keys={[{name:"restaurant", weight: 0.7}, {name:"item_name", weight: 0.3}]}
+                    keys={[{name:"restaurant", weight: 0.4}, {name:"item_name", weight: 0.2}]}
                     Result={Result}/>
             </header>
             <main>
                 <h3>Recommended Meals</h3>
-                {items.map(e => <Meal key={e.id} {...e} />)}
+                {items.map(e => <Meal key={e._id ?? e.group_id} {...e} />)}
             </main>
         </div>
     )

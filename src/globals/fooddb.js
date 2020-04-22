@@ -28,9 +28,9 @@ const menuItemAtLocation = async (id) => {
         return [];
     }
 }
-const itemsNearLocation = async (lat, lng) => {
+const itemsNearLocation = async (lat, lng, vector) => {
     try {
-        let res = await fetch(`${endpoint}/api/elmenu?dist=2&lat=${lat}&lng=${lng}`);
+        let res = await fetch(`${endpoint}/api/recommendeditems?dist=2&lat=${lat}&lng=${lng}&vector=${vector}`);
         res = await res.json();
         return res;
     } catch (err) {
